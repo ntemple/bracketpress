@@ -52,7 +52,7 @@ function bracketpress_master_header() {
     $matchlist = new BracketPressMatchList(bracketpress()->post->ID);
     ?>
 <script type="text/javascript">
-    var bracketpress_ajax_url = '<?php echo BRACKETPRESS_URL; ?>lib/ajax.php';
+    var bracketpress_ajax_url = '<?php echo admin_url('admin-ajax.php'); ?>';
     var post_id = <?php print bracketpress()->post->ID ?>;
     var sels = eval('(' + '<?php  print json_encode($matchlist->winners); ?>' + ')');
 </script>

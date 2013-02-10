@@ -19,7 +19,7 @@ function in_array(needle, haystack, argStrict) {
     }
     return false;
 }
-//code ends
+
 function autoselect(dd_arr) {
     var reg = new Array();
     reg[1] = "#get_team_selector_south_";
@@ -64,7 +64,7 @@ function fill_in_the_dropdown(dropdowns) {
 
 }
 
-// NLT, set team selectionsin final bracket
+// NLT, set team selections in final bracket
 function set_team(match_id, slot, team_id, winner) {
 
     if (! team_id) return;
@@ -100,6 +100,14 @@ function get_sel_match(id) {
 
 jQuery(document).ready(
 function () {
+
+    $(document).ajaxError(function(event, request, settings) {
+        console.log(event);
+        console.log(request);
+        console.log(settings);
+        //  $( "div.log" ).text( "Triggered ajaxError handler." );
+    });
+
     $("#tabs").tabs();
 
     /* NLT Manually filling in the items for the final 4
@@ -159,7 +167,7 @@ function () {
 
     //autoselect the values retrieved from DB for round 2
     sels = autoselect(sels);
-    console.log(sels);
+
     //fill options in the round 3 select boxes
     fill_in_the_dropdown($('#round3 select'));
 
@@ -246,8 +254,9 @@ function () {
                                 if ($('#' + next_round_dd_id + ' > option[value="' + first_option + '"]').length == 1) {
                                     if ($('#' + next_round_dd_id + ' > option[value="' + first_option + '"]').is(':selected')) {
                                         $.ajax({
+                                            type: 'POST',
                                             url: bracketpress_ajax_url,
-                                            data:'task=save_selection&mid=' + match_id + '&winner=0&bracket=' + post_id,
+                                            data:'action=bracketpress&task=save_selection&mid=' + match_id + '&winner=0&bracket=' + post_id,
                                             success:function (res) {
                                                 //alert(res);
                                             }
@@ -262,10 +271,11 @@ function () {
                                 if ($('#' + next_round_dd_id + ' > option[value="' + second_option + '"]').length == 1) {
                                     if ($('#' + next_round_dd_id + ' > option[value="' + second_option + '"]').is(':selected')) {
                                         $.ajax({
+                                            type: 'POST',
                                             url: bracketpress_ajax_url,
-                                            data:'task=save_selection&mid=' + match_id + '&winner=0&banner=' + post_id,
+                                            data:'action=bracketpress&task=save_selection&mid=' + match_id + '&winner=0&banner=' + post_id,
                                             success:function (res) {
-                                                //alert(res);
+                                                // alert(res);
                                             }
                                         });
                                     }
@@ -305,8 +315,9 @@ function () {
                                     }
 
                                     $.ajax({
+                                        type: 'POST',
                                         url: bracketpress_ajax_url,
-                                        data:d + '&winner=' + current_selected_value + '&bracket='+ post_id,
+                                        data:d + '&action=bracketpress&&winner=' + current_selected_value + '&bracket='+ post_id,
                                         success:function (res) {
                                             //alert(res);
                                         }
@@ -353,8 +364,9 @@ function () {
                                     }
 
                                     $.ajax({
+                                        type: 'POST',
                                         url: bracketpress_ajax_url,
-                                        data:d + '&winner=' + current_selected_value + '&bracket=' + post_id,
+                                        data:d + '&action=bracketpress&&winner=' + current_selected_value + '&bracket=' + post_id,
                                         success:function (res) {
                                             //alert(res);
                                         }
@@ -377,11 +389,12 @@ function () {
 
                 }
                 //$(this).parent('p').parent('div')
-                $('#' + match_id + ' select').each(function (i, v) {    //console.log($(this));
+                $('#' + match_id + ' select').each(function (i, v) {
                     if ($(this).find('option[value=' + current_selected_value + ']').length) {
                         $.ajax({
+                            type: 'POST',
                             url: bracketpress_ajax_url,
-                            data:'task=change_team&bracket=' + post_id + '&mid=' + match_id + '&team_num=' + (i + 1) + '&val=' + current_selected_value,
+                            data:'action=bracketpress&task=change_team&bracket=' + post_id + '&mid=' + match_id + '&team_num=' + (i + 1) + '&val=' + current_selected_value,
                             success:function (res) {
                                 //alert(res);
                             }
@@ -389,7 +402,7 @@ function () {
                     }
                 });
                 //reinitialize variables
-                match_id_div = $('#' + next_round_dd_id).parent('p').parent('div');//next_round_div.children('div');
+                match_id_div = $('#' + next_round_dd_id).parent('p').parent('div');
 
             }
             //end for loop
@@ -416,8 +429,9 @@ function () {
                                     //alert(opts[l].value);
                                     t.val(opts[l].value);
                                     $.ajax({
+                                        type: 'POST',
                                         url: bracketpress_ajax_url,
-                                        data:'task=save_selection&mid=' + $(this).parent('p').attr('rel') + '&winner=' + opts[l].value + '&bracket=' + post_id,
+                                        data:'action=bracketpress&task=save_selection&mid=' + $(this).parent('p').attr('rel') + '&winner=' + opts[l].value + '&bracket=' + post_id,
                                         success:function (res) {
                                             //alert(res);
                                         }
@@ -451,10 +465,10 @@ function () {
         var match = + $(this).parent('p').attr('rel');
         if (! match) match = this_match_id;
 
-        var data = 'task=save_selection&mid=' + match + '&winner=' + $(this).val() + '&bracket=' + post_id;
-        console.log(data);
+        var data = 'action=bracketpress&task=save_selection&mid=' + match + '&winner=' + $(this).val() + '&bracket=' + post_id;
 
         $.ajax({
+            type: 'POST',
             url: bracketpress_ajax_url,
             data: data,
             success:function (res) {

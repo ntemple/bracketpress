@@ -4,7 +4,7 @@ Plugin Name: BracketPress
 Description: Run and score a tournament bracket pool.
 Author: Scott Hack and Nick Temple
 Author URI: http://www.bracketpress.com
-Version: 1.0.0
+Version: 1.0.1
 */
 
 /*
@@ -108,6 +108,7 @@ final class BracketPress {
             if (is_admin()) {
                 include(self::$instance->includes_dir . 'admin/admin.php');
                 self::$instance->admin = BracketPressAdmin::instance();
+                self::$instance->setup_admin_actions(); // For ajax
             }
         }
         return self::$instance;
@@ -214,6 +215,7 @@ final class BracketPress {
         require_once( $this->plugin_dir  . 'lib/functions.php' );
         require_once( $this->plugin_dir  . 'lib/bracketpress-shortcodes.php');
         require_once( $this->plugin_dir  . 'lib/bracketpress-widgets.php');
+        require_once( $this->plugin_dir  . 'lib/ajax.php' );
         require_once( $this->includes_dir  . 'models/queries.php');
         require_once( $this->includes_dir  . 'models/match.php');
 
@@ -242,7 +244,7 @@ final class BracketPress {
             'register_posts'           => 'bracketpress_init',
             'route'                    => 'bracketpress_route',
             'generate_rewrite_rules'   => 'bracketpress_generate_rewrite_rules',
-            'add_rewrite_tags'         => 'bracketpress_init',
+            'add_rewrite_tags'         => 'bracketpress_init'
         );
 
         add_action( 'wp_login', array( $this, 'on_signin' ), 10, 2 );
@@ -254,6 +256,23 @@ final class BracketPress {
 
         $this->add_actions($actions);
     }
+
+    /**
+     * Setup admin actions.
+     * http://codex.wordpress.org/AJAX_in_Plugins
+     * @todo hook into bracketpress action system
+     */
+    private function setup_admin_actions() {
+        add_action('wp_ajax_bracketpress', array($this, 'handle_frontend_ajax'));
+        add_action('wp_ajax_bracketpress', array($this, 'handle_nopriv_frontend_ajax'));
+    }
+
+    function handle_frontend_ajax() {
+        ob_clean();
+        bracketpress_do_ajax();
+        die(); //?per codex. Is it right to die?
+    }
+
 
     function activate() {
         require_once($this->plugin_dir . 'install/install.php');
@@ -454,7 +473,6 @@ final class BracketPress {
 
     /**
      * Handle scoring.
-     * @todo finish scoring.
      */
 
     function score() {
@@ -505,7 +523,6 @@ final class BracketPress {
 
     /**
      * Get the number of points awarded for this match.
-     * @todo finish scoring lookup
      *
      * make dynamic based on settings, which means
      * we have to figure out which round match is in
