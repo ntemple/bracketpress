@@ -173,8 +173,8 @@ function widget_wp_bracketpresslogin($args) {
 
 /* Init widget/styles/scripts */
 function widget_wp_bracketpresslogin_init() {
-	
-	$plugin_url = (is_ssl()) ? str_replace('http://','https://', WP_PLUGIN_URL) : WP_PLUGIN_URL;
+
+	$plugin_url = (is_ssl()) ? str_replace('http://','https://', bracketpress()->plugin_url . 'widgets') : bracketpress()->plugin_url . 'widgets';
 	
 	// CSS
 	$bracketpress_login_css = $plugin_url . '/bracketpress-login/style.css';
