@@ -11,22 +11,7 @@ class queries
     {
         global $wpdb;
         $table = bracketpress()->getTable('team');
-        $results = $wpdb->get_results("select * from $table order by region, seed");
-
-        $main_array = array();
-        foreach($results as $result)
-        {
-            $team_data =array();
-            $team_data['ID'] = $result->ID;
-            $team_data['name'] = $result->name;
-            $team_data['seed'] = $result->seed;
-            $team_data['region'] = $result->region;
-            $team_data['conference'] = $result->conference;
-
-            array_push($main_array, $team_data);
-        }
-        return $main_array;
-
+        return $wpdb->get_results("select * from $table order by ID", ARRAY_A);
     }
 
     /**
@@ -44,6 +29,42 @@ class queries
         return $results;
     }
 
+    /**
+     * @static
+     * This function updates information from the Bracket Data Page forms.
+     * It uses the post data from the user to get this information
+     *
+     * this function will collect all the data from the post array in BracketPress Data
+     *  and insert those values into the database.
+     *  This function will update or create depending on whether that row exists
+     */
+    public static function insertBracketData()
+    {
+        global $wpdb;
+        $table = bracketpress()->getTable('team');
+
+        $d = stripslashes_deep($_POST);
+
+
+        for ($tid = 1; $tid <= NUMBER_OF_TEAMS; $tid++) {
+            if (isset($d['team_' . $tid]) && $d['team_' . $tid]) {
+                $record = array(
+                    'name' => stripslashes($d['team_'.$tid]),
+                    'seed' =>$d['seed_'.$tid],
+                    'region' => $d['region_'.$tid],
+                    'conference' => stripslashes($d['conference_' . $tid])
+                );
+                $record['ID'] = $record['region'] * 100 + $record['seed'];
+                if ($record['ID']) {
+                    $sql = $wpdb->prepare("REPLACE INTO $table (`ID`, `name`, `seed`, `region`, `conference`) values (%d,%s,%d,%d,%s)", $record['ID'], $record['name'], $record['seed'], $record['region'], $record['conference']);
+                    $wpdb->query($sql);
+                }
+            }
+        }
+        return;
+    }
+
+
     public static function getLocationCount()
     {
         global $wpdb;
@@ -54,24 +75,11 @@ class queries
 
     public static function updateBracketData()
     {
-        $y = 1;
-        global $wpdb;
-        $table = bracketpress()->getTable('team');
-        for($i=0; $i<NUMBER_OF_TEAMS;$i++)
-        {
-            $data[$i] = array(
-                //'ID' =>(($_POST['region_'.$y]*100)+$_POST['seed_'.$y]),
-                'seed'=> $_POST['seed_'.$y],
-                'name'=> $_POST['team_'.$y],
-                'region'=> $_POST['region_'.$y],
-                'conference' => $_POST['conference_'.$y]);
-            $where[$i] = array('ID'=>( ($_POST['region_'.$y]*100)+$_POST['seed_'.$y] ) );
-            $wpdb->update($table, $data[$i],$where[$i],null,null);
-            $y++;
-        }
-
+        // Insert also handles updates.
+        return;
     }
 
+    // =========== Location
     public static function updateLocationData()
     {
 
@@ -147,38 +155,6 @@ class queries
             //TODO the else condition could be a message to let the user know what they did wrong
 
         }
-    }
-
-    /**
-     * @static
-     * This function updates information from the Bracket Data Page forms.
-     * It uses the post data from the user to get this information
-     */
-    public static function insertBracketData()
-    {
-        //this function will collect all the data from the post array in BracketPress Data
-        //and insert those values into the database.
-        //This function will update or create depending on whether that row exists
-        global $wpdb;
-        $number_of_teams = self::getTeamCount();
-        $team_input_spot = $number_of_teams +1;
-        //echo $number_of_teams.'</br>';
-        //echo $team_input_spot.'</br>';
-        $table = bracketpress()->getTable('team');
-        for($i=$team_input_spot; $i<=NUMBER_OF_TEAMS;$i++)
-        {
-            $data[$i] = array(
-                'ID'=>( ($_POST['region_'.$team_input_spot]*100)+$_POST['seed_'.$team_input_spot] ),
-                'name' =>$_POST['team_'.$team_input_spot],
-                'seed' =>$_POST['seed_'.$team_input_spot],
-                'region' => $_POST['region_'.$team_input_spot],
-                'conference' => $_POST['conference_' . $team_input_spot]);
-
-            if($data[$i]['ID'] !== 0) //this keeps blank input fields from being inserted into the database
-                $wpdb->insert($table,$data[$i]);
-
-        }
-
     }
 
 }
