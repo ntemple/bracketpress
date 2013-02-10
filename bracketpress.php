@@ -739,7 +739,7 @@ final class BracketPress {
 
 
 /**
- * The main function responsible for returning the one true bbPress Instance
+ * The main function responsible for returning the one true BracketPress Instance
  * to functions everywhere.
  *
  * Use this function like you would a global variable, except without needing

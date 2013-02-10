@@ -101,13 +101,6 @@ function get_sel_match(id) {
 jQuery(document).ready(
 function () {
 
-    $(document).ajaxError(function(event, request, settings) {
-        console.log(event);
-        console.log(request);
-        console.log(settings);
-        //  $( "div.log" ).text( "Triggered ajaxError handler." );
-    });
-
     $("#tabs").tabs();
 
     /* NLT Manually filling in the items for the final 4
