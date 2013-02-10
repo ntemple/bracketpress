@@ -47,6 +47,12 @@ brought it to life. See the file credits.txt for a full list of contributors.
 
 == Changelog ==
 
+= 1.0.1 =
+* moved credits and changelog to readme.txt
+* moved ajax into main plugin
+* removed extraneous console.log() calls
+* fixed path to login widget javascript
+
 = 1.0.0 =
 * First public release
 * completed initial development
@@ -76,8 +82,26 @@ brought it to life. See the file credits.txt for a full list of contributors.
 
 == Upgrade Notice ==
 
+= 1.0.1 =
+* Important bugfix, please upgrade.
+
 = 1.0.0 =
 * Please upgrade to the stable release.
+
+== Credits ==
+
+= People =
+* Scott Hack
+* Nick Temple
+* Karamvir Singh
+* Charles Griffin
+
+= GPL Software =
+* bracketpress-login widget based on sidebar-login, https://github.com/mikejolley/sidebar-login, (c) Mike Jolley
+* bracketpress-register widget based on Registration Form Widget by http://www.wpmania.it/registration-widget/, (c) Stefano Garuti
+
+
+
 
 
 
