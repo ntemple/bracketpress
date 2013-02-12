@@ -4,7 +4,7 @@ Donate link: http://www.bracketpress.com/donate
 Tags: ncaa, bracket
 Requires at least: 3.5.0
 Tested up to: 3.5.1
-Stable tag: 1.0.0
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -46,6 +46,11 @@ brought it to life. See the file credits.txt for a full list of contributors.
 
 
 == Changelog ==
+
+= 1.0.2 =
+* Improved team handling
+* Removed widgets due to licensing concerns. They will become their own plugins.
+* Removed dependency on local jquery-ui.
 
 = 1.0.1 =
 * moved credits and changelog to readme.txt
@@ -95,12 +100,6 @@ brought it to life. See the file credits.txt for a full list of contributors.
 * Nick Temple
 * Karamvir Singh
 * Charles Griffin
-
-= GPL Software =
-* bracketpress-login widget based on sidebar-login, https://github.com/mikejolley/sidebar-login, (c) Mike Jolley
-* bracketpress-register widget based on Registration Form Widget by http://www.wpmania.it/registration-widget/, (c) Stefano Garuti
-
-
 
 
 
