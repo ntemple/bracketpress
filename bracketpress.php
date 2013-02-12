@@ -207,9 +207,7 @@ final class BracketPress {
 
         require($this->plugin_dir  . 'bracketpress-config.php');
 
-
         require_once( $this->plugin_dir  . 'includes/core/actions.php' );
-
 
         // Include required library files
         require_once( $this->plugin_dir  . 'lib/functions.php' );
@@ -219,10 +217,6 @@ final class BracketPress {
         require_once( $this->includes_dir  . 'models/queries.php');
         require_once( $this->includes_dir  . 'models/match.php');
 
-
-        // Load widgets
-        require_once($this->plugin_dir .  'widgets/bracketpress-login/bracketpress-login.php');
-//        require_once($this->plugin_dir  . 'widgets/bracketpress-register/bracketpress-register.php');
     }
 
     /**
