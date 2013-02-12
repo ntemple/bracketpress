@@ -30,21 +30,19 @@ function bracketpress_master_enqueue() {
     wp_register_style('bp_bracket', BRACKETPRESS_CSS_URL . 'bracket.css');
     wp_register_style('bp_jquery-ui', BRACKETPRESS_CSS_URL . 'jquery-ui-theme.css');
 
-    wp_register_script('bp_master', BRACKETPRESS_URL . 'templates/' . 'bracket_edit.js');
-    wp_register_script('bp_jquery-ui', BRACKETPRESS_JS. 'jquery-ui.js');
-
     wp_enqueue_style('bp_bracket');
     wp_enqueue_style('bp_jquery-ui');
 
+    wp_register_script('bp_master', BRACKETPRESS_URL . 'templates/' . 'bracket_edit.js');
+
     wp_enqueue_script('jquery');
-    wp_enqueue_script('bp_jquery-ui');
 
-//    wp_enqueue_script('jquery-ui-core');
-//    wp_enqueue_script('jquery-ui-tabs');
-//    wp_enqueue_script('jquery-ui-selectable');
-//    wp_enqueue_script('jquery-ui-widget');
+    wp_enqueue_script('jquery-ui-core');
+    wp_enqueue_script('jquery-ui-tabs');
+    wp_enqueue_script('jquery-ui-selectable');
+    wp_enqueue_script('jquery-ui-widget');
 
-     wp_enqueue_script('bp_master');
+    wp_enqueue_script('bp_master');
 }
 add_action('wp_enqueue_scripts', 'bracketpress_master_enqueue');
 
