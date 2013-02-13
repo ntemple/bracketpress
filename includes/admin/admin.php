@@ -147,7 +147,7 @@ class BracketPressAdmin {
 
     function add_pages() {
         add_submenu_page ( 'edit.php?post_type=brackets', 'BracketPress > Team Data', 'Team Data', 'manage_options', 'bracketpress_teams', array($this, 'forms_page'));
-        //add_submenu_page ( 'edit.php?post_type=brackets', 'BracketPress > Location Data', 'Location Data', 'manage_options', 'bracketpress_location', array($this, 'location_page'));
+        add_submenu_page ( 'edit.php?post_type=brackets', 'BracketPress > Add Ons', 'Add Ons',     'manage_options', 'bracketpress_addons', array($this, 'addons_page'));
     }
 
     // Admin Pages
@@ -171,6 +171,10 @@ class BracketPressAdmin {
         }
 
         include(bracketpress()->plugin_dir . 'templates/locations.php');
+    }
+
+    function addons_page() {
+        include(bracketpress()->plugin_dir . 'templates/addons.php');
     }
 
 }
