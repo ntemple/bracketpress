@@ -53,7 +53,7 @@ bracketpress_create_sub_action( 'admin_notices',            'bracketpress_admin_
 //@todo make anonymous functions when 5.3 is available on all platforms
 function bracketpress_create_sub_action($hook, $action, $priority = 10, $params = 0) {
 
-    $callback = "function $action() { do_action('$action', func_get_args()); }";
+    $callback = "function $action() { \$args = func_get_args(); do_action('$action', \$args); }";
     eval($callback);
 
     add_action($hook, $action, $priority);
