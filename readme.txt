@@ -1,7 +1,7 @@
 === BracketPress ===
 Contributors: ntemple, scotthack
 Donate link: http://www.bracketpress.com/donate
-Tags: ncaa, bracket
+Tags: ncaa, bracket, march madness, brackets, bracket pool, tournament, basketball, sports
 Requires at least: 3.5.0
 Tested up to: 3.5.1
 Stable tag: 1.0.2
@@ -15,13 +15,17 @@ tournament pool.  Designed with businesses in mind, this tool enables you to eng
 website visitors in a fun and meaningful way.  All the while, keeping traffic on YOUR site, with YOUR
 branding.
 
+An inside look :
+
+http://www.youtube.com/watch?v=JtOxPQt7Z5Q
+
 == Features ==
 
 We make your site awesome.
 
 == Support ==
 
-Priority support and additional plugins are available via our website at http://www.bracketpress.com
+Priority support and additional plugins are available via our website at [http://www.bracketpress.com] (http://www.bracketpress.com)
 
 == Installation ==
 1.  Use the standard WordPress install for a plugin, or FTP the files up.
