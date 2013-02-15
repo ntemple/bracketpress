@@ -4,7 +4,7 @@ Donate link: http://www.bracketpress.com/donate
 Tags: ncaa, bracket, march madness, brackets, bracket pool, tournament, basketball, sports
 Requires at least: 3.5.0
 Tested up to: 3.5.1
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -52,6 +52,7 @@ brought it to life. See the file credits.txt for a full list of contributors.
 == Changelog ==
 
 = 1.0.3 =
+* Critical update for PHP 5.2 users
 * Added Store
 * Minor cleanups
 
@@ -72,7 +73,7 @@ brought it to life. See the file credits.txt for a full list of contributors.
 == Upgrade Notice ==
 
 = 1.0.3 =
-* Now! Extend BracketPress with additional plugins!
+* Critical update for PHP 5.2
 
 = 1.0.1 =
 * Important bugfix, please upgrade.
@@ -87,8 +88,6 @@ brought it to life. See the file credits.txt for a full list of contributors.
 * Nick Temple
 * Karamvir Singh
 * Charles Griffin
-
-
 
 
 
