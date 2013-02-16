@@ -51,6 +51,11 @@ brought it to life. See the file credits.txt for a full list of contributors.
 
 == Changelog ==
 
+= 1.0.4 =
+
+* added bracketpress_display_name filter for munging team names
+
+
 = 1.0.3 =
 * Critical update for PHP 5.2 users
 * Added Store

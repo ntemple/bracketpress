@@ -98,13 +98,15 @@ add_filter( 'template_include', 'bracketpress_use_my_template' );
 /**
  * Format a team name so it will fit in the bracket
  *
- * @todo this needs to be / run a filter
- *
  * @param $str
  * @return mixed
  */
 function bracketpress_display_name($str, $size = 16) {
-    return str_replace(' ', '&nbsp;', mb_substr($str, 0, $size));
+    $name = apply_filters( 'bracketpress_display_name', $str);
+    if ($name == $str) {
+        $name = str_replace(' ', '&nbsp;', mb_substr($str, 0, $size));
+    }
+    return $name;
 }
 
 // Where are the match queries?
