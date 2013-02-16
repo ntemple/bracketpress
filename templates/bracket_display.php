@@ -31,7 +31,7 @@ add_action('wp_enqueue_scripts', 'bracketpress_display_enqueue_css');
  * @param $team2
  */
 
-function bracketpress_partial_display_bracket($this_match_id, $m, $team1, $team2, $final = false) {
+function bracketpress_partial_display_bracket($this_match_id, $m, $team1, $team2, $final = false, $match = null) {
 
     // Special id tags to make the final bracket work
     if ($final) {
@@ -42,17 +42,27 @@ function bracketpress_partial_display_bracket($this_match_id, $m, $team1, $team2
         $id2 = '';
     }
 
+/*
+    $class = '';
+    if ($match) {
+        if ($match->points_awarded > 0) {
+            $class = 'won';
+        } else if ($match->points_awarded === 0) {
+            $class = 'lost';
+        }
+    }
+*/
     ?>
 <div id="match<?php print $this_match_id ?>" class="match m<?php print $m ?>">
     <p class="slot slot1 team_<?php echo $team1->ID ?>" <?php echo $id1 ?>>
-            <span class="seed">
+            <span class="seed <?php echo $class ?>">
                 <?php if ($team1) { ?>
                 <span class="team_ids"> <?php echo $team1->seed; ?></span> <?php print bracketpress_display_name($team1->name) ?></span>
             <?php } ?>
                 <em class="score"><?php  ?></em>
     </p>
     <p class="slot slot2 team_<?php echo $team1->ID ?>" <?php echo $id2 ?>>
-            <span class="seed">
+            <span class="seed <?php echo $class ?>">
                 <?php if ($team2) { ?>
                 <span class="team_ids"> <?php echo $team2->seed; ?></span> <?php print bracketpress_display_name($team2->name) ?>
             </span>
@@ -83,7 +93,7 @@ function bracketpress_partial_display_seed($region) {
 
         $m = $x+1;
 
-        bracketpress_partial_display_bracket($match_id, $m, $team1, $team2);
+        bracketpress_partial_display_bracket($match_id, $m, $team1, $team2, false, $match);
     }
 }
 
@@ -165,9 +175,14 @@ function bracketpress_display_rounds($num, $name) {
 ?>
 
 <?php if ($message) print $message; // Flash message?>
+<?php if (bracketpress()->post->post_excerpt) {
+   print "<p>".bracketpress()->post->post_excerpt . "</p>";
+}
+?>
+<font size="+1">Current Bracket Score: <?php print bracketpress()->get_score(); ?></font>
 
 <?php   if (bracketpress()->is_bracket_owner()) {  ?>
-<a href="<?php print bracketpress()->get_bracket_permalink(bracketpress()->post->ID, true)?>">Edit Bracket</a>
+<a href="<?php print bracketpress()->get_bracket_permalink(bracketpress()->post->ID, true)?>" style="float: right;">Edit Bracket</a>
 <?php } ?>
 
 <div class="bracket standings light-blue">
@@ -252,7 +267,7 @@ function bracketpress_display_rounds($num, $name) {
                 $team1 = $match->getTeam1();
                 $team2 = $match->getTeam2();
 
-                bracketpress_partial_display_bracket($match_id, $x, $team1, $team2);
+                bracketpress_partial_display_bracket($match_id, $x, $team1, $team2, false, $match);
             }
         ?>
         </div>
@@ -268,7 +283,7 @@ function bracketpress_display_rounds($num, $name) {
             $team1 = $match->getTeam1();
             $team2 = $match->getTeam2();
 
-            bracketpress_partial_display_bracket(63, 1, $team1, $team2, $final = true);
+            bracketpress_partial_display_bracket(63, 1, $team1, $team2, $final = true, $match);
         ?>
         </div>
     </div>

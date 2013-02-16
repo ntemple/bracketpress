@@ -45,7 +45,7 @@ class BracketPressMatchList {
 
         if (! isset(self::$winners_list[$post_id])) {
             $table_match = bracketpress()->getTable('match');
-            $sql = $wpdb->prepare("SELECT match_id, concat('match', match_id) as match_ident, winner_id FROM $table_match WHERE post_id=%d order by match_id", $post_id);
+            $sql = $wpdb->prepare("SELECT match_id, concat('match', match_id) as match_ident, winner_id, points_awarded FROM $table_match WHERE post_id=%d order by match_id", $post_id);
             self::$winners_list[$post_id] = $wpdb->get_results($sql);
         }
         $this->winners = self::$winners_list[$post_id];

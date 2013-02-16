@@ -309,3 +309,12 @@ table.gridtable td.title {
 div#primary {
 width: 100%;
 }
+
+#bracket .match .won {
+    color: green; font-weight: bold;
+}
+
+#bracket .match .lost {
+    color: red;
+    text-decoration: line-through; font-weight: bold;
+}

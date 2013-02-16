@@ -29,8 +29,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  * Based on bbPress singleton model
  */
 if (@constant('BRACKETPRESS_DEBUG')) {
-  error_reporting(E_ALL &~ E_NOTICE &~ E_STRICT);
-  ini_set("display_errors", 1);
+    error_reporting(E_ALL &~ E_NOTICE &~ E_STRICT);
+    ini_set("display_errors", 1);
+    if (!defined('WP_DEBUG')) {
+        define('WP_DEBUG', true);
+    }
 }
 
 // Security Exit if accessed directly
@@ -169,14 +172,6 @@ final class BracketPress {
 
         $this->options = get_option('bracketpress_options');
 
-        // Move to MatchList
-        // global $bracketpress_matches_order;
-
-        /** Versions **********************************************************/
-
-        $this->version    = '0.5.0';
-        $this->db_version = '2.0.0';
-
         /** Paths *************************************************************/
 
         // Setup some base path and URL information
@@ -285,6 +280,27 @@ final class BracketPress {
             // Note: if you don't want to display the bracket, then remove the shortcode
             $this->update_option('master_id', $master_id);
         }
+
+        if (! $this->get_option('leaderboard_id')) {
+            $post = array(
+                'post_type'    => 'page',
+                'post_title'   => 'BracketPress Leaderboard',
+                'post_content' => '[bracketpress_all_brackets]',
+                'post_status'  => 'pending'
+            );
+            $this->update_option('leaderboard_id', wp_insert_post($post));
+        }
+
+        if (! $this->get_option('edit_id')) {
+            $post = array(
+                'post_type'    => 'page',
+                'post_title'   => 'My Brackets',
+                'post_content' => '[bracketpress_edit]',
+                'post_status'  => 'pending'
+            );
+            $this->update_option('edit_id', wp_insert_post($post));
+        }
+
         flush_rewrite_rules();
     }
 
@@ -421,6 +437,7 @@ final class BracketPress {
         if (! $user) return null;
         $author_id = $user->ID;
 
+
         // Check for multiple posts
         $post_id = $this->get_bracket_for_user($author_id);
         if ($post_id && ! $allow_multiple) {
@@ -428,10 +445,12 @@ final class BracketPress {
             return $post_id;
         }
 
+
+
         // If we get here, we want to create the post
 
         // Override post title for SEO?
-        $post_title = $title ? $title : $this->bracket_title;
+        $post_title = $title ? $title : $this->bracket_title . ' ' . $user->data->display_name;
         $post_title = apply_filters('bracketpress_bracket_title', $post_title);
 
         //@todo need a excerpt. Maybe created with a plugin?
@@ -468,6 +487,23 @@ final class BracketPress {
     /**
      * Handle scoring.
      */
+
+    function get_score($id = null) {
+        if (!$id) $id = $this->post->ID;
+        $score = get_post_meta($id, 'score', true);
+        return $score;
+    }
+
+    function reset_score() {
+        global $wpdb;
+
+        $table_match = bracketpress()->getTable('match');
+        $table_postmeta = $wpdb->prefix . 'postmeta';
+        $wpdb->query("update $table_match set points_awarded=NULL");
+        //@todo: constrain delete by post_type = brackets
+        $wpdb->query("delete from $table_postmeta where meta_key='score'");
+
+    }
 
     function score() {
         /** @var wpdb $wpdb */
@@ -506,13 +542,18 @@ final class BracketPress {
         $sql = "select post_id, sum(points_awarded) as score from $table_match group by post_id"; // where post_type='brackets'";
         print "$sql\n";
         $brackets = $wpdb->get_results($sql);
+        print_r($brackets);
         foreach ($brackets as $bracket) {
               update_post_meta($bracket->post_id, 'score', $bracket->score);
         }
 
        $debug = ob_get_clean();
 
-       return "<pre>\n$debug</pre>";
+       $log = "<pre>\n$debug</pre>";
+//       print $log;
+
+
+       return $log;
     }
 
     /**
@@ -699,6 +740,18 @@ final class BracketPress {
                 return;
             }
 
+        //@todo move this out to an action that can be overridden
+        if (isset($_POST['cmd_bracketpress_save'])) {
+            wp_update_post(array(
+                'ID' => $post->ID,
+                'post_title' => $_POST['post_title'],
+                'post_excerpt' => $_POST['post_excerpt'],
+            ));
+
+            $this->post->post_title = $_POST['post_title'];
+            $this->post->post_excerpt = $_POST['post_excerpt'];
+        }
+
         $file = apply_filters( 'bracketpress_template_edit',   $this->themes_dir .  'bracket_edit.php' );
         ob_start();
         include($file);
@@ -747,5 +800,6 @@ function bracketpress() {
 bracketpress();
 
 endif;
+
 
 

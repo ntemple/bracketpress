@@ -185,6 +185,10 @@ class BracketPressSettingsPage {
             $out = bracketpress()->score();
             $msg = 'Scoring Completed';
         }
+        if (isset($_POST['cmd_reset'])) {
+            $out = bracketpress()->reset_score();
+            $msg = 'Scoring Cleared. Re-Run Scoring to Update.';
+        }
         ?>
     <style type="text/css">
         .form-table th {text-align: right}
@@ -202,6 +206,7 @@ class BracketPressSettingsPage {
         <form method="post">
             <?php print $msg ?><br>
             <input type="submit" name="cmd_score" value="Process Scoring">
+            <input type="submit" name="cmd_reset" value="Reset Scoring">
         </form>
 
     </div>

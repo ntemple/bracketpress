@@ -51,7 +51,7 @@ function bracketpress_shortcode_edit($args) {
     foreach ($posts as $post) {
         $link = bracketpress()->get_bracket_permalink($post->ID);
         $link_edit = bracketpress()->get_bracket_permalink($post->ID, true);
-        print "<tr><td>{$post->post_title}</td><td width='20'><a href='$link'>View</a></td><td width='20'><a href='$link_edit'>Edit</a></td></tr>\n";
+        print "<tr><td>{$post->post_title}</td><td width='20'><a href='$link'>View</a>&nbsp;</td><td width='20'><a href='$link_edit'>Edit</a></td></tr>\n";
 //        print "<tr><td colspan=3><pre>" . print_r($post, true) . "</pre></td></tr>\n";
     }
 
@@ -70,19 +70,56 @@ add_shortcode( 'bracketpress_edit', 'bracketpress_shortcode_edit' );
 add_shortcode( 'bracketpress_all_brackets', 'bracketpress_shortcode_all_brackets' );
 
 function bracketpress_shortcode_all_brackets() {
-
+//    print "<pre>\n";
     $args = array(
         'post_type' => 'brackets',
         'posts_per_page' => 5,//get_option( 'posts_per_page' ), // you can assign 15
         'paged'	=> get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1,
+        'meta_key' => 'score',
+        'orderby'  => 'meta_value_num'
     );
 
     $wp_query = new WP_Query($args);
 
-    if ( $wp_query->have_posts() ) :
-        while ($wp_query->have_posts()) : $wp_query->the_post();
-            the_excerpt();
-        endwhile;
+    if ($wp_query->have_posts()) {
+
+
+        $posts = $wp_query->get_posts();
+        print "<table>\n";
+        foreach ($posts as $post) {
+            $author_q =  get_user_by('id', $post->post_author);
+            $author =  $author_q->data;
+            $author_meta_q  = get_user_meta($post->post_author);
+            foreach ($author_meta_q as $key => $value) {
+                $author->$key = $author_meta_q[$key][0];
+            }
+            $link = bracketpress()->get_bracket_permalink($post->ID);
+            $score = get_post_meta($post->ID, 'score', true);
+            if (!$score ) {
+                $score = 'Unscored';
+            }
+            print "
+            <tr>
+              <td><a href='{$link}'>{$post->post_title}</a></td>
+              <td>{$author->display_name}</td>
+              <td>{$author->first_name}</td>
+              <td>{$author->last_name[0]}</td>
+              <td>{$score}</td>
+            </tr>";
+
+        }
+        print "</table>\n";
+
+
+/*
+        while ($wp_query->have_posts()) {
+
+
+            print_r($post);
+            $title = $post->title;
+            print $title;
+        }
+*/
 
         $big = 999999999; // need an unlikely integer
         echo '<div class="pagination">';
@@ -94,9 +131,10 @@ function bracketpress_shortcode_all_brackets() {
             'total' => $wp_query->max_num_pages
         ) );
         echo '</div>';
-    else: ?>
-    No brackets were found.
-    <?php endif ?>
-<?php
+
+    } else {
+        print "No brackets were found.\n";
+    }
+//    print "</pre>\n";
 }
 
