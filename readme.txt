@@ -1,10 +1,10 @@
 === BracketPress ===
 Contributors: ntemple, scotthack
 Donate link: http://www.bracketpress.com/donate
-Tags: ncaa, bracket, march madness, brackets, bracket pool, tournament, basketball, sports
+Tags: ncaa, bracket, march madness, brackets, bracket pool, tournament, basketball, sports, gambling, betting
 Requires at least: 3.5.0
 Tested up to: 3.5.1
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,7 +31,7 @@ Priority support and additional plugins are available via our website at [http:/
 1.  Use the standard WordPress install for a plugin, or FTP the files up.
 1.  Activate the plugin.
 1.  Enter in the teams ( or Purchase the Pro Add-on ) and their seeds.
-1.  Create a page with the [bracketpress_edit] shortcode to allow your visitors to edit their brackets.
+1.  Edit and publish the two pages generated with plugin activation.
 1.  Invite people to your pool
 1.  Enjoy!
 
@@ -52,9 +52,9 @@ brought it to life. See the file credits.txt for a full list of contributors.
 == Changelog ==
 
 = 1.0.4 =
-
-* added bracketpress_display_name filter for munging team names
-
+* Added bracketpress_display_name filter for munging team names
+* Now automatically creates pages needed upon activation.
+* Added leaderboard functionality
 
 = 1.0.3 =
 * Critical update for PHP 5.2 users
@@ -67,14 +67,14 @@ brought it to life. See the file credits.txt for a full list of contributors.
 * Removed dependency on local jquery-ui.
 
 = 1.0.1 =
-* moved credits and changelog to readme.txt
-* moved ajax into main plugin
-* removed extraneous console.log() calls
-* fixed path to login widget javascript
+* Moved credits and changelog to readme.txt
+* Moved ajax into main plugin
+* Removed extraneous console.log() calls
+* Fixed path to login widget javascript
 
 = 1.0.0 =
 * First public release
-* completed initial development
+* Completed initial development
 == Upgrade Notice ==
 
 = 1.0.3 =
@@ -93,6 +93,5 @@ brought it to life. See the file credits.txt for a full list of contributors.
 * Nick Temple
 * Karamvir Singh
 * Charles Griffin
-
-
+* Jason Melgoza ( CSS of Bracket )
 
