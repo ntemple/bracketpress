@@ -1,6 +1,7 @@
 <h1>Manage Teams</h1>
+<div class="updated">
 <p>
-    Don't want to mess with data entry? Rather have beer than update scoring during the tournament?
+    Don't want to mess with data entry? Rather have a beer than update scoring during the tournament?
     The <a href="http://www.bracketpress.com/downloads/bracketpress-pro-data-feed/" target="store">BracketPress Pro Data Plugin</a> automatically gives you sample data,
     (from 2012), PLUS updates your teams with 2013 on Selection Data.
 </p>
@@ -8,12 +9,12 @@
     Every time a game is played, the Pro
     Plugin updates your master bracket, re-calculates scoring, and optionally notifies your users of their
     scores - <i>plus much more!</i>. Note: All features may not be available until after March 10th.
-
 </p>
 </p>
 <p>
    <a href="http://www.bracketpress.com/downloads/bracketpress-pro-data-feed/" target="store">Go Pro! Now</a>
 </p>
+</div>
 <p>
     Or, enter the team names, below:
 </p>
