@@ -10,6 +10,15 @@
     Plugin updates your master bracket, re-calculates scoring, and optionally notifies your users of their
     scores - <i>plus much more!</i>. Note: All features may not be available until after March 10th.
 </p>
+<p>
+<center>
+<table width=70%>
+<tr><td><li>Automatically populate teams and seeds on Selection Sunday</li></td><td><li>2012 Data Pre-loaded for Testing</li></td><td><li>Premium Support Included w/ PRO</li></td></tr>
+<tr><td><li>Automatic Updates of Game Winners and Scores</li></td><td><li>Automatic Re-calculations of Scoring</li></td><td><li>Exclusive Pro Member Forum</li></td></tr>
+<tr><td><li>Optional User Notifications of Updates</li></td><td><li>Access to Add-Ons Before the Public</li></td><td><li>Develop Chat Invitations</li></td></tr>
+</table>
+</center>
+
 </p>
 <p>
    <a href="http://www.bracketpress.com/downloads/bracketpress-pro-data-feed/" target="store">Go Pro! Now</a>
