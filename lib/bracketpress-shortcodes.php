@@ -47,7 +47,7 @@ function bracketpress_shortcode_edit($args) {
         // print "Uh oh! More than one post connected to your Id. What to do, what to do? Show you all, or just use the first one and ignore the rest? Or check admin settings?";
     }
 
-    print "My Brackets\n<table width='60%' align='center'>\n";
+    print "My Brackets\n<table width='60%'>\n";
     foreach ($posts as $post) {
         $link = bracketpress()->get_bracket_permalink($post->ID);
         $link_edit = bracketpress()->get_bracket_permalink($post->ID, true);
