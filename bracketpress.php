@@ -4,7 +4,7 @@ Plugin Name: BracketPress
 Description: Run and score a tournament bracket pool.
 Author: Scott Hack and Nick Temple
 Author URI: http://www.bracketpress.com
-Version: 1.0.2
+Version: 1.0.4
 */
 
 /*
@@ -240,8 +240,6 @@ final class BracketPress {
 
         register_activation_hook(__FILE__, array($this, 'activate'));
         register_deactivation_hook(__FILE__, array($this, 'deactivate'));
-
-        add_shortcode( 'bracketpress_test_scoring', array($this, 'score' ));
 
         $this->add_actions($actions);
     }

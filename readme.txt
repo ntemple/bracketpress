@@ -54,7 +54,7 @@ brought it to life. See the file credits.txt for a full list of contributors.
 = 1.0.4 =
 * Added bracketpress_display_name filter for munging team names
 * Now automatically creates pages needed upon activation.
-* Added leaderboard functionality
+* Added leaderboard and bracket display shortcode
 
 = 1.0.3 =
 * Critical update for PHP 5.2 users
