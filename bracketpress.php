@@ -543,12 +543,14 @@ final class BracketPress {
 
         // Get all the bracket posts
         //$table = $wpdb->prefix . 'posts';
-        $sql = "select post_id, sum(points_awarded) as score from $table_match group by post_id"; // where post_type='brackets'";
+        $sql = "select post_id, sum(points_awarded) as score from $table_match group by post_id";
         print "$sql\n";
         $brackets = $wpdb->get_results($sql);
         print_r($brackets);
         foreach ($brackets as $bracket) {
-              update_post_meta($bracket->post_id, 'score', $bracket->score);
+            $old_score = get_post_meta($bracket->post_id, 'score');
+            update_post_meta($bracket->post_id, 'score', $bracket->score);
+            do_action('bracketpress_event_updatescore', array('post_id' => $bracket->post_id, 'old_score' => $old_score, 'score' => $bracket->score));
         }
 
        $debug = ob_get_clean();
@@ -753,19 +755,25 @@ final class BracketPress {
 
         //@todo move this out to an action that can be overridden
         if (isset($_POST['cmd_bracketpress_save'])) {
-            wp_update_post(array(
+
+            $post_data = array(
                 'ID' => $post->ID,
                 'post_title' => $_POST['post_title'],
                 'post_excerpt' => $_POST['post_excerpt'],
-            ));
+            );
 
-            $this->post->post_title = $_POST['post_title'];
-            $this->post->post_excerpt = $_POST['post_excerpt'];
+            $post_data = apply_filters('bracketpress_update_bracket', $post_data );
+
+            wp_update_post($post_data);
+
+            $this->post->post_title = $post_data['post_title'];
+            $this->post->post_excerpt = $post_data['post_excerpt'];
         }
 
         if (isset($_POST['cmd_bracketpress_randomize'])) {
             $this->matchlist->randomize();
             $this->matchlist = new BracketPressMatchList($post->ID, true); // Reload the bracket
+            do_action('bracketpress_event_randomize');
         }
 
         $file = apply_filters( 'bracketpress_template_edit',   $this->themes_dir .  'bracket_edit.php' );

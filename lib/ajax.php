@@ -41,8 +41,10 @@ function bracketpress_do_ajax() {
 
                 if (count($count) == 0) {
                     $sql = $wpdb->prepare("INSERT INTO $table_match (match_id, user_id, post_id, winner_id) VALUES(%d, %d, %d, %d)", $match_id, $user_id, $post_id, $winner_id);
+                    do_action('bracketpress_selection_new', array('match_id' => $match_id, 'user_id' => $user_id, 'winner_id' => $winner_id, 'post_id' => $post_id));
                 } else {
                     $sql = $wpdb->prepare("UPDATE $table_match set winner_id=%d WHERE user_id=%d AND match_id=%d and post_id=%d", $winner_id,  $user_id, $match_id, $post_id);
+                    do_action('bracketpress_selection_change', array('match_id' => $match_id, 'user_id' => $user_id, 'winner_id' => $winner_id, 'post_id' => $post_id));
                 }
                 $wpdb->query($sql);
             }
