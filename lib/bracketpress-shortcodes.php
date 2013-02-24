@@ -14,6 +14,15 @@
  *
  */
 function bracketpress_shortcode_display($atts) {
+
+    extract( shortcode_atts( array(
+        'before_widget' => '',
+        'after_widget' => '',
+        'title' => '',
+        'before_title' => '',
+        'after_title' => '',
+    ), $atts ) );
+
     return bracketpress()->getContent();
 }
 add_shortcode( 'bracketpress_display_bracket', 'bracketpress_shortcode_display' );
@@ -31,6 +40,15 @@ add_shortcode( 'bracketpress_display_bracket', 'bracketpress_shortcode_display' 
  */
 
 function bracketpress_shortcode_edit($atts) {
+
+    extract( shortcode_atts( array(
+        'before_widget' => '',
+        'after_widget' => '',
+        'title' => '',
+        'before_title' => '',
+        'after_title' => '',
+    ), $atts ) );
+
 
     $user_id = get_current_user_id();
 
@@ -55,7 +73,7 @@ function bracketpress_shortcode_edit($atts) {
         // print "Uh oh! More than one post connected to your Id. What to do, what to do? Show you all, or just use the first one and ignore the rest? Or check admin settings?";
     }
 
-    print "My Brackets\n<table width='60%'>\n";
+    print "<table width='60%'>\n";
     foreach ($posts as $post) {
         $link = bracketpress()->get_bracket_permalink($post->ID);
         $link_edit = bracketpress()->get_bracket_permalink($post->ID, true);
@@ -92,6 +110,11 @@ function bracketpress_shortcode_all_brackets($atts) {
     extract( shortcode_atts( array(
         'orderby' => 'default',
         'posts_per_page' => 10,
+        'before_widget' => '',
+        'after_widget' => '',
+        'title' => '',
+        'before_title' => '',
+        'after_title' => '',
     ), $atts ) );
 
     $args = array(
@@ -114,7 +137,7 @@ function bracketpress_shortcode_all_brackets($atts) {
 
 
         $posts = $wp_query->get_posts();
-        print "<table>\n";
+        print "<table >\n";
         foreach ($posts as $post) {
             $author_q =  get_user_by('id', $post->post_author);
             $author =  $author_q->data;
