@@ -74,8 +74,8 @@
                         <?php
                         echo "<option value=''>Choose a region</option>";
                         echo "<option value='1' {$selected_region[1]}>South</option>";
-                        echo "<option value='2' {$selected_region[2]}>East</option>";
-                        echo "<option value='3' {$selected_region[3]}>West</option>";
+                        echo "<option value='2' {$selected_region[2]}>West</option>";
+                        echo "<option value='3' {$selected_region[3]}>East</option>";
                         echo "<option value='4' {$selected_region[4]}>Midwest</option>";
                         ?>
                     </select>
