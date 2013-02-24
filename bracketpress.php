@@ -82,8 +82,13 @@ final class BracketPress {
     var $default_shortcode;
 
 
+
+
     // The curent post query
-     var $post;
+    var $post;
+    /** @var BracketPressMatchList */
+    var $matchlist;
+
     // Generated content to place in the post
     var $content;
 
@@ -722,6 +727,7 @@ final class BracketPress {
      */
     function bracket_edit($post) {
         $this->post = $post;
+        $this->matchlist = new BracketPressMatchList($post->ID);
 
         if (!$this->is_bracket_owner()) {
             $this->bracket_display($post, '<div class="updated"><p>You must be signed in to edit this bracket.</p></div>');
@@ -778,6 +784,8 @@ final class BracketPress {
     function bracket_display($post, $message = '') {
 
         $this->post = $post;
+        $this->matchlist = new BracketPressMatchList($post->ID);
+
         $file = apply_filters( 'bracketpress_template_display',   $this->themes_dir .  'bracket_display.php' );
 
         ob_start();

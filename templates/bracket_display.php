@@ -42,27 +42,41 @@ function bracketpress_partial_display_bracket($this_match_id, $m, $team1, $team2
         $id2 = '';
     }
 
-/*
-    $class = '';
-    if ($match) {
-        if ($match->points_awarded > 0) {
-            $class = 'won';
-        } else if ($match->points_awarded === 0) {
-            $class = 'lost';
-        }
+    // Find out if we won or lost the previous match
+    $class1 = '';
+    $class2 = '';
+
+    $prev_match = BracketPressMatchList::getPreviousMatch($this_match_id);
+    if ($prev_match) {
+        $matchlist = bracketpress()->matchlist;
+        $prev_match[0] = $matchlist->getMatch($prev_match[0]);
+        $prev_match[1] = $matchlist->getMatch($prev_match[1]);
+
+        $x1 = print_r($prev_match[0], true);
+        $x2 = print_r($prev_match[1], true);
+
+
+        $x1 = $prev_match[0]->points_awarded;
+        $x2 = $prev_match[1]->points_awarded;
+
+        if ($prev_match[0]->points_awarded == '0') $class1 = 'lost';
+        if ($prev_match[0]->points_awarded > 0) $class1 = 'won';
+
+        if ($prev_match[1]->points_awarded == '0') $class2 = 'lost';
+        if ($prev_match[1]->points_awarded > 0) $class2 = 'won';
     }
-*/
+
     ?>
 <div id="match<?php print $this_match_id ?>" class="match m<?php print $m ?>">
     <p class="slot slot1 team_<?php echo $team1->ID ?>" <?php echo $id1 ?>>
-            <span class="seed <?php echo $class ?>">
+            <span class="seed <?php echo $class1 ?>">
                 <?php if ($team1) { ?>
                 <span class="team_ids"> <?php echo $team1->seed; ?></span> <?php print bracketpress_display_name($team1->name) ?></span>
             <?php } ?>
                 <em class="score"><?php  ?></em>
     </p>
     <p class="slot slot2 team_<?php echo $team1->ID ?>" <?php echo $id2 ?>>
-            <span class="seed <?php echo $class ?>">
+            <span class="seed <?php echo $class2 ?>">
                 <?php if ($team2) { ?>
                 <span class="team_ids"> <?php echo $team2->seed; ?></span> <?php print bracketpress_display_name($team2->name) ?>
             </span>
@@ -258,7 +272,7 @@ function bracketpress_display_rounds($num, $name) {
 
         <div class="region">
         <?php
-            $matchlist = new BracketPressMatchList(bracketpress()->post->ID);
+            $matchlist = bracketpress()->matchlist;
 
             for($x = 1; $x <3; $x++) {
                 $match_id = 60 + $x;
