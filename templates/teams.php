@@ -31,7 +31,7 @@
 </p>
 <?php } else {
 ?>
-<p>BracketPress Pro is installed and is managing your team names. Please not changes below will be overwritten during the tournament. </p>
+<p>BracketPress Pro is installed and is managing your team names. Please note changes below will be overwritten during the tournament. </p>
 <?php } ?>
 
 <form id="bracket_fillout_form" name="bracket_fillout_form" method="post">
