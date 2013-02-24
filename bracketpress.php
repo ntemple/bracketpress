@@ -4,7 +4,7 @@ Plugin Name: BracketPress
 Description: Run and score a tournament bracket pool.
 Author: Scott Hack and Nick Temple
 Author URI: http://www.bracketpress.com
-Version: 1.0.4
+Version: 1.0.5
 */
 
 /*
