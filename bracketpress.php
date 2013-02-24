@@ -489,6 +489,7 @@ final class BracketPress {
     function get_score($id = null) {
         if (!$id) $id = $this->post->ID;
         $score = get_post_meta($id, 'score', true);
+        if ($score == '') $score = "Unscored";
         return $score;
     }
 
@@ -729,7 +730,13 @@ final class BracketPress {
 
         $close = $this->get_bracket_close_time();
         $date = strftime("%Y-%m-%d %H:%M:%S", $close);
-        $message = "The brackets will close on $date.<br>";
+
+        $date_format = get_option( 'date_format' );
+        $time_format = get_option( 'time_format' );
+        $date = date($date_format, $close) . " at " . date($time_format, $close);
+
+        $datediff = human_time_diff(time(), $close);
+        $message = "The bracket will close for editing in $datediff on $date.<br>";
 
 
         if ($post->ID != $this->get_option('master_id'))

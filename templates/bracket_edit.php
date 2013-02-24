@@ -179,14 +179,29 @@ function bracketpress_partial_show_region($region, $region_name, $match) {
 </div>
 <?php
 }
-
 ?>
+
 <?php print $message ?><br>
-<a href="<?php print bracketpress()->get_bracket_permalink(bracketpress()->post->ID, false)?>">View Bracket</a>
+<?php if (bracketpress()->get_option('edit_title')) { ?>
+
+<form method="post">
+    <input type="hidden" name="bracket" value="<?php print bracketpress()->post->ID ?>">
+    Title:<br>
+    <input type="text" name="post_title" value="<?php echo stripslashes(bracketpress()->post->post_title) ?>"><br>
+    Description:<br>
+    <textarea name="post_excerpt" rows="4" cols="80"><?php echo stripslashes(bracketpress()->post->post_excerpt) ?></textarea>
+    <br>
+    <input type="submit" name="cmd_bracketpress_save" value="Save Title & Description">
+</form>
+
+<?php  } ?>
+
+<a href="<?php print bracketpress()->get_bracket_permalink(bracketpress()->post->ID, false)?>" style="float: right">View Bracket</a>
 
 <div class="bracket standings light-blue">
 
 <div id="content-wrapper">
+
 <div id="table">
 
     <!-- Table Dates -->
@@ -285,21 +300,6 @@ function bracketpress_partial_show_region($region, $region_name, $match) {
 
 
     </div>
-
-
-<?php if (bracketpress()->get_option('edit_title')) { ?>
-
-<form method="post">
-<input type="hidden" name="bracket" value="<?php print bracketpress()->post->ID ?>">
-Title:<br>
-<input type="text" name="post_title" value="<?php echo bracketpress()->post->post_title ?>"><br>
-Description:<br>
-<textarea name="post_excerpt" rows="4" cols="80"><?php echo bracketpress()->post->post_excerpt ?></textarea>
-<br>
-<input type="submit" name="cmd_bracketpress_save">
-</form>
-
- <?php  } ?>
 </div>
     <!-- Bracket -->
 
