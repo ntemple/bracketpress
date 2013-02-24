@@ -763,6 +763,11 @@ final class BracketPress {
             $this->post->post_excerpt = $_POST['post_excerpt'];
         }
 
+        if (isset($_POST['cmd_bracketpress_randomize'])) {
+            $this->matchlist->randomize();
+            $this->matchlist = new BracketPressMatchList($post->ID, true); // Reload the bracket
+        }
+
         $file = apply_filters( 'bracketpress_template_edit',   $this->themes_dir .  'bracket_edit.php' );
         ob_start();
         include($file);

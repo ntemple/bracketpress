@@ -192,6 +192,7 @@ function bracketpress_partial_show_region($region, $region_name, $match) {
     <textarea name="post_excerpt" rows="4" cols="80"><?php echo stripslashes(bracketpress()->post->post_excerpt) ?></textarea>
     <br>
     <input type="submit" name="cmd_bracketpress_save" value="Save Title & Description">
+    <input type="submit" name="cmd_bracketpress_randomize" value="Randomize Bracket">
 </form>
 
 <?php  } ?>
