@@ -1,4 +1,6 @@
 <h1>Manage Teams</h1>
+
+<?php  if (!class_exists( 'BracketPressPro' )) { ?>
 <div class="updated">
 <p>
     Don't want to mess with data entry? Rather have a beer than update scoring during the tournament?
@@ -12,7 +14,7 @@
 </p>
 <p>
 <center>
-<table width=70%>
+<table width=90%>
 <tr><td><li>Automatically populate teams and seeds on Selection Sunday</li></td><td><li>2012 Data Pre-loaded for Testing</li></td><td><li>Premium Support Included w/ PRO</li></td></tr>
 <tr><td><li>Automatic Updates of Game Winners and Scores</li></td><td><li>Automatic Re-calculations of Scoring</li></td><td><li>Exclusive Pro Member Forum</li></td></tr>
 <tr><td><li>Optional User Notifications of Updates</li></td><td><li>Access to Add-Ons Before the Public</li></td><td><li>Develop Chat Invitations</li></td></tr>
@@ -27,6 +29,11 @@
 <p>
     Or, enter the team names, below:
 </p>
+<?php } else {
+?>
+<p>BracketPress Pro is installed and is managing your team names. Please not changes below will be overwritten during the tournament. </p>
+<?php } ?>
+
 <form id="bracket_fillout_form" name="bracket_fillout_form" method="post">
     <table cellpadding="10px">
 

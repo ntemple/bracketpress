@@ -20,9 +20,7 @@
 <a href="http://www.bracketpress.com/extensions">Browse All Add-Ons</a><br/>
 
 <ul class="addons">
-<!--
         <li><a href="http://www.bracketpress.com/downloads/bracketpress-pro-data-feed/" target="store"><img src="http://s3.amazonaws.com/network.intellispire.com/bp-edd/assets/bracketpress-pro-data-feed.png"></a></li>
--->
         <li><a href="http://www.bracketpress.com/downloads/aweber-newsletter-plugin/" target="store"><img src="http://s3.amazonaws.com/network.intellispire.com/bp-edd/assets/aweber-newsletter-plugin.png"></a></li>
         <li><a href="http://www.bracketpress.com/downloads/icontact-newsletter-plugin/" target="store"><img src="http://s3.amazonaws.com/network.intellispire.com/bp-edd/assets/icontact-newsletter-plugin.png"></a></li>
         <li><a href="http://www.bracketpress.com/downloads/constantcontact-newsletter-plugin/" target="store"><img src="http://s3.amazonaws.com/network.intellispire.com/bp-edd/assets/constantcontact-newsletter-plugin.png"></a></li>
