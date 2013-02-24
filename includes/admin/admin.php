@@ -43,7 +43,7 @@ class BracketPressAdmin {
                 'name' => 'date_brackets_close',
                 'type' => 'date',
                 'size' => '10',
-                'default' => '3/21/2013',
+                'default' => '3/20/2013',
                 'label' => 'Day Brackets Close',
                 'description' =>  'Which day does the bracket lock? (server date is ' . strftime('%D'). ')'
             ),
