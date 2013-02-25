@@ -187,6 +187,29 @@ class BracketPressMatchList {
         return $next_game;
     }
 
+    static function getRound($id) {
+
+        if ($id == 63) return 6; // Final game
+        if ($id == 62) return 5;
+        if ($id == 61) return 5; // Final Four
+
+        $region = (int) ( ($id-1) / 15) + 1;
+        $base = ($region -1) * 15;
+        $game_number = ($id - $base);
+
+        switch ($game_number) {
+            case 15: return 4;
+            case 13:
+            case 14: return 3;
+            case 13:
+            case 12:
+            case 11:
+            case 10:
+            case 9:  return 2;
+            default: return 1;
+        }
+    }
+
     /**
      * Given the current match, should calculate the
      * previous match that got us here.

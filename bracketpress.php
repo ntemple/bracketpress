@@ -556,7 +556,7 @@ final class BracketPress {
        $debug = ob_get_clean();
 
        $log = "<pre>\n$debug</pre>";
-//       print $log;
+       print $log;
 
 
        return $log;
@@ -576,20 +576,7 @@ final class BracketPress {
     function getMatchDetails($match_id) {
         $match = new stdClass();
 
-        $round = 0; // initialize to nonsense to catch errors
-
-        if ($match_id == 63) $round = 6;
-        if ($match_id == 61 || $match_id == 62) $round = 5;
-
-        // we 15 games per bracket - reduce
-        if ($match_id < 61) {
-            $match_id = $match_id % 15; // the first 15 are what count
-        }
-        if ($match_id < 9) $round = 1;
-        if ($match_id > 8 && $match_id < 13) $round = 2;
-        if ($match_id == 13 || $match_id = 14) $round = 3;
-        if ($match_id == 15) $round = 4;
-
+        $round = BracketPressMatchList::getRound($match_id);
 
         switch($round) {
             case 1: $match->points = $this->get_option('points_first_round'); break;
@@ -600,6 +587,8 @@ final class BracketPress {
             case 6: $match->points = $this->get_option('points_sixth_round'); break; // Final game
             default: throw new Exception("Match $match_id doesn't exist for round $round");
         }
+
+        print "Round: $match_id: $round: {$match->points}\n";
 
         return $match;
     }
