@@ -33,7 +33,8 @@ function bracketpress_do_ajax() {
         case 'save_selection':
 
             $winner_id = isset($_POST['winner']) ? (int) $_POST['winner'] : NULL; // winner
-            if ($winner_id) {
+            if (! $winner_id) $winner_id = 'NULL';
+//            if ($winner_id) {
                 // Make sure we have a record
                 $sql = $wpdb->prepare("SELECT match_id FROM $table_match WHERE user_id=%d AND match_id=%d and post_id=%d", $user_id, $match_id, $post_id);
 
@@ -47,7 +48,7 @@ function bracketpress_do_ajax() {
                     do_action('bracketpress_selection_change', array('match_id' => $match_id, 'user_id' => $user_id, 'winner_id' => $winner_id, 'post_id' => $post_id));
                 }
                 $wpdb->query($sql);
-            }
+//            }
             break;
     }
 
