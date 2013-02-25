@@ -293,10 +293,7 @@ table.gridtable td.title {
 #bracket .region3 .match, #bracket .region4 .match {
   border-right: 0px;
 }
-#bracket .final_pick {
-  font-size: 16px;
-  background: #fff;
-}
+/*
 #bracket .loser, #bracket strike {
   font-weight: normal;
   color: #777777;
@@ -305,9 +302,15 @@ table.gridtable td.title {
 #bracket strike a {
   color: #666;
 }
-
+*/
 div#primary {
 width: 100%;
+}
+
+#bracket .match .final_pick {
+    font-size: 14px;
+    background: #fff;
+    font-weight: bold;
 }
 
 #bracket .match .won {

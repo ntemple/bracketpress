@@ -33,22 +33,18 @@ add_action('wp_enqueue_scripts', 'bracketpress_display_enqueue_css');
 
 function bracketpress_partial_display_bracket($this_match_id, $m, $team1, $team2, $final = false, $match = null) {
 
-    // Special id tags to make the final bracket work
-    if ($final) {
-        $id1 = "id='slot127'";
-        $id2 = "id='slot128'";
-    } else {
-        $id1 = '';
-        $id2 = '';
-    }
-
     // Find out if we won or lost the previous match
     $class1 = '';
     $class2 = '';
 
+    // Final match CSS
+    $final_match_2 = $final_match_1 = '';
+    $id1 = $id2 = '';
+
     $prev_match = BracketPressMatchList::getPreviousMatch($this_match_id);
+    $matchlist = bracketpress()->matchlist;
+
     if ($prev_match) {
-        $matchlist = bracketpress()->matchlist;
         $prev_match[0] = $matchlist->getMatch($prev_match[0]);
         $prev_match[1] = $matchlist->getMatch($prev_match[1]);
 
@@ -66,17 +62,27 @@ function bracketpress_partial_display_bracket($this_match_id, $m, $team1, $team2
         if ($prev_match[1]->points_awarded > 0) $class2 = 'won';
     }
 
+    // Special id css display tags to make the final bracket work visually
+    if ($final) {
+
+        if ($match->winner_id) {
+            if ($match->winner_id == $team1->ID) $final_match_1 = 'final_pick';
+            if ($match->winner_id == $team2->ID) $final_match_2 = 'final_pick';
+        }
+        $id1 = "id='slot127'";
+        $id2 = "id='slot128'";
+    }
     ?>
 <div id="match<?php print $this_match_id ?>" class="match m<?php print $m ?>">
     <p class="slot slot1 team_<?php echo $team1->ID ?>" <?php echo $id1 ?>>
-            <span class="seed <?php echo $class1 ?>">
+            <span class="seed <?php echo $class1 . ' ' . $final_match_1 ?>">
                 <?php if ($team1) { ?>
                 <span class="team_ids"> <?php echo $team1->seed; ?></span> <?php print bracketpress_display_name($team1->name) ?></span>
             <?php } ?>
                 <em class="score"><?php  ?></em>
     </p>
     <p class="slot slot2 team_<?php echo $team1->ID ?>" <?php echo $id2 ?>>
-            <span class="seed <?php echo $class2 ?>">
+            <span class="seed <?php echo $class2 . ' ' . $final_match_2 ?>">
                 <?php if ($team2) { ?>
                 <span class="team_ids"> <?php echo $team2->seed; ?></span> <?php print bracketpress_display_name($team2->name) ?>
             </span>
