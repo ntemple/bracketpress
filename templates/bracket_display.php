@@ -40,6 +40,7 @@ function bracketpress_partial_display_bracket($this_match_id, $m, $team1, $team2
     // Final match CSS
     $final_match_2 = $final_match_1 = '';
     $id1 = $id2 = '';
+    $combined_score = '';
 
     $prev_match = BracketPressMatchList::getPreviousMatch($this_match_id);
     $matchlist = bracketpress()->matchlist;
@@ -200,11 +201,12 @@ function bracketpress_display_rounds($num, $name) {
 }
 ?>
 <font size="+1">Current Bracket Score: <?php print bracketpress()->get_score(); ?></font>
-
 <?php   if (bracketpress()->is_bracket_owner()) {  ?>
 <a href="<?php print bracketpress()->get_bracket_permalink(bracketpress()->post->ID, true)?>" style="float: right;">Edit Bracket</a>
 <?php } ?>
-
+<br>
+Final Game Combined Score Estimate: <?php print  stripslashes(bracketpress()->post->combined_score); ?>
+<?php // print "<pre>" . print_r(bracketpress()->post, true) . "</pre>"; ?>
 <div class="bracket standings light-blue">
 <div id="content-wrapper">
 <div id="table">
@@ -224,21 +226,6 @@ function bracketpress_display_rounds($num, $name) {
             <th class="round_2"> 2nd ROUND</th>
             <th class="round_1 current"> 1st ROUND</th>
         </tr>
-<!--
-        <tr>
-            <td class="current"> March 18-19</td>
-            <td> March 20-21</td>
-            <td> March 25-26</td>
-            <td> March 27-28</td>
-            <td> April 3</td>
-            <td> April 5</td>
-            <td> April 3</td>
-            <td> March 27-28</td>
-            <td> March 25-26</td>
-            <td> March 20-21</td>
-            <td class="current"> March 18-19</td>
-        </tr>
--->
     </table>
 </div>
 

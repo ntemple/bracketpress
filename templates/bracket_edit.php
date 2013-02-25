@@ -25,7 +25,10 @@
  *
  */
 
-// @todo: combine these with the core WordPress versions of the same name
+/**
+ * Enqueue Front-End Scripts
+ * we need bracketprs, jquery and jquery-ui
+ */
 function bracketpress_master_enqueue() {
     wp_register_style('bp_bracket', BRACKETPRESS_CSS_URL . 'bracket.css');
     wp_register_style('bp_jquery-ui', BRACKETPRESS_CSS_URL . 'jquery-ui-theme.css');
@@ -46,6 +49,10 @@ function bracketpress_master_enqueue() {
 }
 add_action('wp_enqueue_scripts', 'bracketpress_master_enqueue');
 
+/**
+ * Our javascript variables
+ */
+
 function bracketpress_master_header() {
     $matchlist = new BracketPressMatchList(bracketpress()->post->ID);
     ?>
@@ -59,7 +66,7 @@ function bracketpress_master_header() {
 add_action('wp_head', 'bracketpress_master_header');
 
 /**
- * Show the 16 seeded teamsfor the bracket
+ * Show the 16 seeded teams for the bracket
  *
  * @param $region
  * @param $match
@@ -182,20 +189,24 @@ function bracketpress_partial_show_region($region, $region_name, $match) {
 ?>
 
 <?php print $message ?><br>
-<?php if (bracketpress()->get_option('edit_title')) { ?>
-
 <form method="post">
+    <input type="submit" name="cmd_bracketpress_randomize" value="Randomize Bracket" style="float: right">
+    <?php if (bracketpress()->get_option('edit_title')) { ?>
     <input type="hidden" name="bracket" value="<?php print bracketpress()->post->ID ?>">
     Title:<br>
     <input type="text" name="post_title" value="<?php echo stripslashes(bracketpress()->post->post_title) ?>"><br>
     Description:<br>
     <textarea name="post_excerpt" rows="4" cols="80"><?php echo stripslashes(bracketpress()->post->post_excerpt) ?></textarea>
     <br>
-    <input type="submit" name="cmd_bracketpress_save" value="Save Title & Description">
-    <input type="submit" name="cmd_bracketpress_randomize" value="Randomize Bracket">
+<?php  } ?>
+    Final Game Combined Score:
+    <br>
+    <input type="text" name="combined_score" size="5" value="<?php echo stripslashes(bracketpress()->post->combined_score) ?>">
+    (used for scoring tie breakers)
+    <br>
+    <input type="submit" name="cmd_bracketpress_save" value="Save">
 </form>
 
-<?php  } ?>
 
 <a href="<?php print bracketpress()->get_bracket_permalink(bracketpress()->post->ID, false)?>" style="float: right">View Bracket</a>
 
@@ -208,33 +219,8 @@ function bracketpress_partial_show_region($region, $region_name, $match) {
     <!-- Table Dates -->
     <table class="gridtable">
         <tr>
-            <th class="round_1 current"> 1st ROUND </th>
-            <th class="round_2 "> 2nd ROUND </th>
-            <th class="round_3"> SWEET 16 </th>
-            <th class="round_4"> ELITE EIGHT </th>
-            <th class="round5"> FINAL FOUR </th>
-            <th class="round_6"> CHAMPION </th>
-            <th class="round_5"> FINAL FOUR </th>
-            <th class="round_4"> ELITE EIGHT </th>
-            <th class="round_3"> SWEET 16 </th>
-            <th class="round_2"> 2nd ROUND </th>
-            <th class="round_1 current"> 1st ROUND </th>
+            <th>&nbsp;</th>
         </tr>
-<!--
-        <tr>
-            <td class="current"> March 18-19 </td>
-            <td> March 20-21 </td>
-            <td> March 25-26 </td>
-            <td> March 27-28 </td>
-            <td> April 3 </td>
-            <td> April 5 </td>
-            <td> April 3 </td>
-            <td> March 27-28 </td>
-            <td> March 25-26 </td>
-            <td> March 20-21 </td>
-            <td class="current"> March 18-19 </td>
-        </tr>
--->
     </table>
 </div>
 

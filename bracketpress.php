@@ -667,6 +667,7 @@ final class BracketPress {
 
             $is_edit  = $post_query->get( 'edit' );
             $post = array_pop($posts);
+            $post->combined_score = get_post_meta($post->ID, 'combined_score', true);
             $this->post = $post;
 
             if ($is_edit) {
@@ -749,14 +750,18 @@ final class BracketPress {
                 'ID' => $post->ID,
                 'post_title' => $_POST['post_title'],
                 'post_excerpt' => $_POST['post_excerpt'],
+                'combined_score' => $_POST['combined_score'],
             );
 
             $post_data = apply_filters('bracketpress_update_bracket', $post_data );
 
+
             wp_update_post($post_data);
+            update_post_meta($post_data['ID'], 'combined_score', $post_data['combined_score']);
 
             $this->post->post_title = $post_data['post_title'];
             $this->post->post_excerpt = $post_data['post_excerpt'];
+            $this->post->combined_score = $post_data['combined_score'];
         }
 
         if (isset($_POST['cmd_bracketpress_randomize'])) {
