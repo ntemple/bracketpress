@@ -4,7 +4,7 @@ Donate link: http://www.bracketpress.com/donate
 Tags: ncaa, bracket, march madness, brackets, bracket pool, tournament, basketball, sports, gambling, betting
 Requires at least: 3.5.0
 Tested up to: 3.5.1
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -50,6 +50,17 @@ brought it to life. See the file credits.txt for a full list of contributors.
 
 
 == Changelog ==
+
+= 1.0.5 =
+* Added CSS for scoring: use selectors #bracket .match .won { }  and #bracket .match .lost { } to change display
+* Added CSS for final match: use selector .match .final_pick { } to change
+* Fixed scoring problem. Brackets are now being scored correctly.
+* Admin can allow Bracket Name and Bracket Description Editing
+* Added randomize function to automatically fill in a random bracket
+* Added a "combined score" section, to be used as a tie breaker if the
+* added various filters and actions in order to easily integrate with Achievements, CubePoints and similiar plugins
+* Changed close date to display according to Wordpress admin settings
+* various display updates
 
 = 1.0.4 =
 * Added bracketpress_display_name filter for munging team names
