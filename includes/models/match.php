@@ -199,9 +199,8 @@ class BracketPressMatchList {
 
         switch ($game_number) {
             case 15: return 4;
-            case 13:
-            case 14: return 3;
-            case 13:
+            case 14:
+            case 13: return 3;
             case 12:
             case 11:
             case 10:
