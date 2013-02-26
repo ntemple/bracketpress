@@ -4,7 +4,7 @@ Donate link: http://www.bracketpress.com/donate
 Tags: ncaa, bracket, march madness, brackets, bracket pool, tournament, basketball, sports, gambling, betting
 Requires at least: 3.5.0
 Tested up to: 3.5.1
-Stable tag: 1.0.5
+Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -44,10 +44,10 @@ brought it to life. See the file credits.txt for a full list of contributors.
 
 == Screenshots ==
 
-1. Viewing a Bracket
+1. Viewing a Bracket (after scoring)
 2. Editing a Bracket
 3. Administrative Back-end
-
+4. Viewing a Bracket (before scoring)
 
 == Changelog ==
 
