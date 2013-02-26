@@ -343,6 +343,7 @@ final class BracketPress {
                 'thumbnail',
                 'custom-field',
                 'tags',
+                'comments',
                 'author'
             ),
         );
