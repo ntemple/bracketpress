@@ -557,7 +557,7 @@ final class BracketPress {
        $debug = ob_get_clean();
 
        $log = "<pre>\n$debug</pre>";
-       print $log;
+       // print $log;
 
 
        return $log;
