@@ -51,6 +51,10 @@ brought it to life. See the file credits.txt for a full list of contributors.
 
 == Changelog ==
 
+= 1.0.6 =
+* Fixed regression where post title would be empty if allow front-end editing is off
+* Merging of Ajax fix
+
 = 1.0.5 =
 * Added CSS for scoring: use selectors #bracket .match .won { }  and #bracket .match .lost { } to change display
 * Added CSS for final match: use selector .match .final_pick { } to change
