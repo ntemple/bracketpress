@@ -503,6 +503,9 @@ final class BracketPress {
         global $wpdb;
 
         $table_match = bracketpress()->getTable('match');
+        $wpdb->query("update $table_match set points_awarded=NULL");
+
+
         $table_postmeta = $wpdb->prefix . 'postmeta';
         $wpdb->query("update $table_match set points_awarded=NULL");
         //@todo: constrain delete by post_type = brackets

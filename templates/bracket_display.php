@@ -38,7 +38,6 @@ function bracketpress_partial_display_bracket($this_match_id, $m, $team1, $team2
     $class2 = '';
 
     // Final match CSS
-    $final_match_2 = $final_match_1 = '';
     $id1 = $id2 = '';
     $combined_score = '';
 
@@ -67,8 +66,8 @@ function bracketpress_partial_display_bracket($this_match_id, $m, $team1, $team2
     if ($final) {
 
         if ($match->winner_id) {
-            if ($match->winner_id == $team1->ID) $final_match_1 = 'final_pick';
-            if ($match->winner_id == $team2->ID) $final_match_2 = 'final_pick';
+            if ($match->winner_id == $team1->ID) $class1 .= ' final_pick';
+            if ($match->winner_id == $team2->ID) $class2 .= ' final_pick';
         }
         $id1 = "id='slot127'";
         $id2 = "id='slot128'";
@@ -76,14 +75,14 @@ function bracketpress_partial_display_bracket($this_match_id, $m, $team1, $team2
     ?>
 <div id="match<?php print $this_match_id ?>" class="match m<?php print $m ?>">
     <p class="slot slot1 team_<?php echo $team1->ID ?>" <?php echo $id1 ?>>
-            <span class="seed <?php echo $class1 . ' ' . $final_match_1 ?>">
+            <span class="seed <?php echo $class1 ?>">
                 <?php if ($team1) { ?>
                 <span class="team_ids"> <?php echo $team1->seed; ?></span> <?php print bracketpress_display_name($team1->name) ?></span>
             <?php } ?>
                 <em class="score"><?php  ?></em>
     </p>
-    <p class="slot slot2 team_<?php echo $team1->ID ?>" <?php echo $id2 ?>>
-            <span class="seed <?php echo $class2 . ' ' . $final_match_2 ?>">
+    <p class="slot slot2 team_<?php echo $team2->ID ?>" <?php echo $id2 ?>>
+            <span class="seed <?php echo $class2 ?>">
                 <?php if ($team2) { ?>
                 <span class="team_ids"> <?php echo $team2->seed; ?></span> <?php print bracketpress_display_name($team2->name) ?>
             </span>
