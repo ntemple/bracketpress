@@ -747,7 +747,6 @@ final class BracketPress {
                 return;
             }
 
-        //@todo move this out to an action that can be overridden
         if (isset($_POST['cmd_bracketpress_save'])) {
 
             $post_data = array(
@@ -759,9 +758,8 @@ final class BracketPress {
 
             $post_data = apply_filters('bracketpress_update_bracket', $post_data );
 
-
-            wp_update_post($post_data);
-            update_post_meta($post_data['ID'], 'combined_score', $post_data['combined_score']);
+            if ($post_data['post_title']) wp_update_post($post_data);
+            if ($post_data['combined_score'])  update_post_meta($post_data['ID'], 'combined_score', $post_data['combined_score']);
 
             $this->post->post_title = $post_data['post_title'];
             $this->post->post_excerpt = $post_data['post_excerpt'];
