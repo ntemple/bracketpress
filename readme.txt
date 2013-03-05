@@ -51,6 +51,12 @@ brought it to life. See the file credits.txt for a full list of contributors.
 
 == Changelog ==
 
+= 1.2.0 =
+* Out of beta and ready for prime time!
+* Added filters to allow adding HTML to the white areas of the bracket page 
+* Optionally display the BracketPress Logo to support the site
+* Added the "Overall Winner" and combined score right above the final match
+
 = 1.0.6 =
 * Fixed regression where post title would be empty if allow front-end editing is off
 * Merging of Ajax fix
@@ -91,6 +97,9 @@ brought it to life. See the file credits.txt for a full list of contributors.
 * First public release
 * Completed initial development
 == Upgrade Notice ==
+
+= 1.2.0 =
+* Out if beta! Please upgrade.
 
 = 1.0.3 =
 * Critical update for PHP 5.2
