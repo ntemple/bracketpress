@@ -758,7 +758,7 @@ final class BracketPress {
 
         if ($post->ID != $this->get_option('master_id'))
             if ($this->is_bracket_closed()) {
-                $this->bracket_display($post, "$message This bracket has been closed for editing. Good Luck!<br>");
+                $this->bracket_display($post, "This bracket has been closed for editing. Good Luck!<br>");
                 return;
             }
 
