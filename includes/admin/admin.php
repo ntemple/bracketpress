@@ -125,11 +125,20 @@ class BracketPressAdmin {
                 'name' => 'edit_title',
                 'type' => 'list',
                 'size' => 8,
-                'default' => '0',
+                'default' => '1',
                 'label' => 'Allow Title Change',
-                'description' => '(experimental) Allow users to edit the Title and Excerpt for their bracket',
+                'description' => 'Allow users to edit the Title and Excerpt for their bracket',
                 'options' => array('0:Do Not Allow Frontend Editing', "1:Allow Frontend Editing")
-            )
+            ),
+            array(
+                'name' => 'show_bracketpress_logo',
+                'type' => 'list',
+                'size' => 8,
+                'default' => 'no',
+                'label' => 'Show BracketPress Logo',
+                'description' => 'Support the plugin! show the BracketPress Logo with a link to the site',
+                'options' => array('yes:Show logo and link', "no:Do not show logo")
+            ),
 
         );
 

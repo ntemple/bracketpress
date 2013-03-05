@@ -40,13 +40,27 @@ function bracketpress_partial_display_bracket($this_match_id, $m, $team1, $team2
     // Final match CSS
     $id1 = $id2 = '';
     $combined_score = '';
+    $winner1 = $winner2 = '';
 
-    $prev_match = BracketPressMatchList::getPreviousMatch($this_match_id);
+    $prev_match_ids = BracketPressMatchList::getPreviousMatch($this_match_id);
     $matchlist = bracketpress()->matchlist;
 
-    if ($prev_match) {
-        $prev_match[0] = $matchlist->getMatch($prev_match[0]);
-        $prev_match[1] = $matchlist->getMatch($prev_match[1]);
+    $show_seed = true;
+
+    if ($prev_match_ids) {
+
+        $show_seed = false;
+
+        $prev_match = array();
+        $prev_match[0] = $matchlist->getMatch($prev_match_ids[0]);
+        $prev_match[1] = $matchlist->getMatch($prev_match_ids[1]);
+
+        $prev_winner = array(null, null);
+        $winnerlist = bracketpress()->winnerlist;
+        if ($winnerlist) {
+            $prev_winner[0] = $winnerlist->getMatch($prev_match_ids[0]);
+            $prev_winner[1] = $winnerlist->getMatch($prev_match_ids[1]);
+        }
 
         $x1 = print_r($prev_match[0], true);
         $x2 = print_r($prev_match[1], true);
@@ -55,10 +69,17 @@ function bracketpress_partial_display_bracket($this_match_id, $m, $team1, $team2
         $x1 = $prev_match[0]->points_awarded;
         $x2 = $prev_match[1]->points_awarded;
 
-        if ($prev_match[0]->points_awarded == '0') $class1 = 'lost';
+        if ($prev_match[0]->points_awarded == '0') {
+            $class1 = 'lost';
+            $winner1 = $prev_winner[0]->getWinner()->name;
+
+        }
         if ($prev_match[0]->points_awarded > 0) $class1 = 'won';
 
-        if ($prev_match[1]->points_awarded == '0') $class2 = 'lost';
+        if ($prev_match[1]->points_awarded == '0') {
+            $class2 = 'lost';
+            $winner2 = $prev_winner[1]->getWinner()->name;
+        }
         if ($prev_match[1]->points_awarded > 0) $class2 = 'won';
     }
 
@@ -76,15 +97,22 @@ function bracketpress_partial_display_bracket($this_match_id, $m, $team1, $team2
 <div id="match<?php print $this_match_id ?>" class="match m<?php print $m ?>">
     <p class="slot slot1 team_<?php echo $team1->ID ?>" <?php echo $id1 ?>>
             <span class="seed <?php echo $class1 ?>">
+                <?php if ($winner1) { ?>
+                <span class="org_win1"><?php echo $winner1 ?></span>
+                <?php } ?>
+
                 <?php if ($team1) { ?>
-                <span class="team_ids"> <?php echo $team1->seed; ?></span> <?php print bracketpress_display_name($team1->name) ?></span>
+                <span class="team_ids"> <?php if ($show_seed) echo $team1->seed; ?></span> <?php print bracketpress_display_name($team1->name) ?></span>
             <?php } ?>
                 <em class="score"><?php  ?></em>
     </p>
     <p class="slot slot2 team_<?php echo $team2->ID ?>" <?php echo $id2 ?>>
             <span class="seed <?php echo $class2 ?>">
+                <?php if ($winner2) { ?>
+                <span class="org_win2"><?php echo $winner2 ?></span>
+                <?php } ?>
                 <?php if ($team2) { ?>
-                <span class="team_ids"> <?php echo $team2->seed; ?></span> <?php print bracketpress_display_name($team2->name) ?>
+                <span class="team_ids"> <?php if ($show_seed) echo $team2->seed; ?></span> <?php print bracketpress_display_name($team2->name) ?>
             </span>
             <?php } ?>
                 <em class="score"><?php  ?></em>
@@ -259,13 +287,14 @@ Final Game Combined Score Estimate: <?php print  stripslashes(bracketpress()->po
     bracketpress_display_rounds(4, 'Four');
 ?>
 
+
     <div id="round5" class="round">
         <h3>Round Five (2013 NCAA Men's Basketball Tournament)</h3>
 
         <div class="region">
         <?php
-            $matchlist = bracketpress()->matchlist;
 
+            $matchlist = bracketpress()->matchlist;
             for($x = 1; $x <3; $x++) {
                 $match_id = 60 + $x;
                 $match = $matchlist->getMatch($match_id);
@@ -293,5 +322,52 @@ Final Game Combined Score Estimate: <?php print  stripslashes(bracketpress()->po
         ?>
         </div>
     </div>
+
+
+    <?php
+
+    function winnerbox() {
+        ?>
+        <div id="winnerbox" class="round_bx" >
+            <center>
+                <?php
+                $matchlist = bracketpress()->matchlist;
+                $finals = $matchlist->getMatch(63);
+
+                $winnerlist = bracketpress()->winnerlist;
+                if ($winnerlist) {
+
+                    if ($winner->ID === $finals->getWinner()->ID) {
+                        $class = "won";
+                    } else {
+                        $class = "lost";
+                        $winner = $winnerlist->getMatch(63)->getWinner();
+
+                    }
+                }
+
+                ?>
+
+
+                Overall Winner<br>
+                <?php // print print_r($finals, true); ?>
+                <span class="<?php echo $class ?>"><u><?php print ($finals->getWinner()->name); ?></u></span><br>
+                <?php if ($winner) print "( {$winner->name} )"; ?>
+                <br> Combined Score: <?php print  stripslashes(bracketpress()->post->combined_score); ?>
+            </center>
+        </div>
+        <?php
+    }
+
+    ?>
+
+    <?php winnerbox(); ?>
+
+    <div id="brandingbox1" class="round_bx" ><?php print apply_filters('bracketpress_brandingbox1', ''); ?></div>
+    <div id="brandingbox2" class="round_bx" ><?php print apply_filters('bracketpress_brandingbox2', ''); ?></div>
+    <div id="brandingbox3" class="round_bx" ><?php print apply_filters('bracketpress_brandingbox3', ''); ?></div>
+
 </div>
+    
+    
 

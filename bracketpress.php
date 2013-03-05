@@ -89,6 +89,9 @@ final class BracketPress {
     /** @var BracketPressMatchList */
     var $matchlist;
 
+    /** @var BracketPressMatchList */
+    var $winnerlist;
+
     // Generated content to place in the post
     var $content;
 
@@ -246,6 +249,10 @@ final class BracketPress {
         register_activation_hook(__FILE__, array($this, 'activate'));
         register_deactivation_hook(__FILE__, array($this, 'deactivate'));
 
+        if ($this->get_option('show_bracketpress_logo') == 'yes') {
+            add_filter('bracketpress_brandingbox2', array($this, 'show_logo'));
+        }
+
         $this->add_actions($actions);
     }
 
@@ -394,6 +401,14 @@ final class BracketPress {
         }
         return $vars;
     }
+
+    // Branding Box
+
+
+    function show_logo($text) {
+        return '<center><a href="http://www.bracketpress.com"><img src="http://www.bracketpress.com/wp-content/themes/bracketpress/images/logo.jpg" target="bracketpress" height="100"></a></center>';
+    }
+
 
 
 
@@ -794,6 +809,10 @@ final class BracketPress {
 
         $this->post = $post;
         $this->matchlist = new BracketPressMatchList($post->ID);
+        $master = $this->get_option('master_id');
+        if ($master) {
+            $this->winnerlist = new BracketPressMatchList($master);
+        }
 
         $file = apply_filters( 'bracketpress_template_display',   $this->themes_dir .  'bracket_display.php' );
 
