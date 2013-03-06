@@ -71,6 +71,8 @@ class BracketPressMatchList {
         global $wpdb;
 
         $table_match = bracketpress()->getTable('match');
+        $post = get_post($this->post_id);
+
 
         // for each game
         for ($i = 1; $i < 64; $i++) {
@@ -82,7 +84,7 @@ class BracketPressMatchList {
                 shuffle($teams);
                 $winner = array_pop($teams);
                 $match->winner_id = $winner;
-                $sql = $wpdb->prepare("insert ignore into $table_match (post_id, match_id, winner_id) values (%d, %d, %d)", $this->post_id, $i, $winner);
+                $sql = $wpdb->prepare("insert ignore into $table_match (post_id, match_id, winner_id, user_id) values (%d, %d, %d, %d)", $this->post_id, $i, $winner, $post->post_author);
                 $wpdb->query($sql);
             }
         }

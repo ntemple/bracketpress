@@ -11,9 +11,9 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 == Description ==
 
 BracketPress is a free WordPress plugin which enables site owners to run their own Division One NCAA
-tournament pool.  Designed with businesses in mind, this tool enables you to engage and market to your
-website visitors in a fun and meaningful way.  All the while, keeping traffic on YOUR site, with YOUR
-branding.
+tournament pool during March.  Designed with businesses in mind, this tool enables you to engage and
+market to your website visitors in a fun and meaningful way.
+All the while, keeping traffic on YOUR site, with YOUR branding.
 
 An inside look :
 
@@ -50,6 +50,19 @@ brought it to life. See the file credits.txt for a full list of contributors.
 4. Viewing a Bracket (before scoring)
 
 == Changelog ==
+
+= 1.2.1 =
+* Fixed problem where randomization led to a unchangeable bracket due to user_id not being stored.
+
+= 1.2.0 =
+* Out of beta and ready for prime time!
+* Added filters to allow adding HTML to the white areas of the bracket page 
+* Optionally display the BracketPress Logo to support the site
+* Added the "Overall Winner" and combined score right above the final match
+
+= 1.0.6 =
+* Fixed regression where post title would be empty if allow front-end editing is off
+* Merging of Ajax fix
 
 = 1.0.5 =
 * Added CSS for scoring: use selectors #bracket .match .won { }  and #bracket .match .lost { } to change display
@@ -88,6 +101,9 @@ brought it to life. See the file credits.txt for a full list of contributors.
 * Completed initial development
 == Upgrade Notice ==
 
+= 1.2.1 =
+* Out if beta! Please upgrade.
+
 = 1.0.3 =
 * Critical update for PHP 5.2
 
@@ -102,6 +118,7 @@ brought it to life. See the file credits.txt for a full list of contributors.
 = People =
 * Scott Hack
 * Nick Temple
+* Veronica Robinson
 * Karamvir Singh
 * Charles Griffin
 * Jason Melgoza ( CSS of Bracket )

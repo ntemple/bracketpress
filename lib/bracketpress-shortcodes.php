@@ -137,7 +137,7 @@ function bracketpress_shortcode_all_brackets($atts) {
 
 
         $posts = $wp_query->get_posts();
-        print "<table >\n";
+        print "<table width='100%'>\n";
         foreach ($posts as $post) {
             $author_q =  get_user_by('id', $post->post_author);
             $author =  $author_q->data;
@@ -152,11 +152,11 @@ function bracketpress_shortcode_all_brackets($atts) {
             }
             print "
             <tr>
-              <td><a href='{$link}'>{$post->post_title}</a></td>
-              <td>{$author->display_name}</td>
-              <td>{$author->first_name}</td>
-              <td>{$author->last_name[0]}</td>
-              <td>{$score}</td>
+              <td width='30%'><a href='{$link}'>{$post->post_title}</a></td>
+              <td width='25%'>{$author->display_name}</td>
+              <td width='25%'>{$author->first_name}</td>
+              <td width='10%'>{$author->last_name[0]}</td>
+              <td width='10%'>{$score}</td>
             </tr>";
 
         }

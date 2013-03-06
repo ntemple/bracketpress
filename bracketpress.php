@@ -4,7 +4,7 @@ Plugin Name: BracketPress
 Description: Run and score a tournament bracket pool.
 Author: Scott Hack and Nick Temple
 Author URI: http://www.bracketpress.com
-Version: 1.0.5
+Version: 1.2.1
 */
 
 /*
@@ -88,6 +88,9 @@ final class BracketPress {
     var $post;
     /** @var BracketPressMatchList */
     var $matchlist;
+
+    /** @var BracketPressMatchList */
+    var $winnerlist;
 
     // Generated content to place in the post
     var $content;
@@ -246,6 +249,10 @@ final class BracketPress {
         register_activation_hook(__FILE__, array($this, 'activate'));
         register_deactivation_hook(__FILE__, array($this, 'deactivate'));
 
+        if ($this->get_option('show_bracketpress_logo') == 'yes') {
+            add_filter('bracketpress_brandingbox2', array($this, 'show_logo'));
+        }
+
         $this->add_actions($actions);
     }
 
@@ -395,6 +402,14 @@ final class BracketPress {
         return $vars;
     }
 
+    // Branding Box
+
+
+    function show_logo($text) {
+        return '<center><a href="http://www.bracketpress.com"><img src="http://www.bracketpress.com/wp-content/themes/bracketpress/images/logo.jpg" target="bracketpress" height="100"></a></center>';
+    }
+
+
 
 
     /**
@@ -503,6 +518,9 @@ final class BracketPress {
         global $wpdb;
 
         $table_match = bracketpress()->getTable('match');
+        $wpdb->query("update $table_match set points_awarded=NULL");
+
+
         $table_postmeta = $wpdb->prefix . 'postmeta';
         $wpdb->query("update $table_match set points_awarded=NULL");
         //@todo: constrain delete by post_type = brackets
@@ -740,11 +758,10 @@ final class BracketPress {
 
         if ($post->ID != $this->get_option('master_id'))
             if ($this->is_bracket_closed()) {
-                $this->bracket_display($post, "$message This bracket has been closed for editing. Good Luck!<br>");
+                $this->bracket_display($post, "This bracket has been closed for editing. Good Luck!<br>");
                 return;
             }
 
-        //@todo move this out to an action that can be overridden
         if (isset($_POST['cmd_bracketpress_save'])) {
 
             $post_data = array(
@@ -756,9 +773,8 @@ final class BracketPress {
 
             $post_data = apply_filters('bracketpress_update_bracket', $post_data );
 
-
-            wp_update_post($post_data);
-            update_post_meta($post_data['ID'], 'combined_score', $post_data['combined_score']);
+            if ($post_data['post_title']) wp_update_post($post_data);
+            if ($post_data['combined_score'])  update_post_meta($post_data['ID'], 'combined_score', $post_data['combined_score']);
 
             $this->post->post_title = $post_data['post_title'];
             $this->post->post_excerpt = $post_data['post_excerpt'];
@@ -793,6 +809,10 @@ final class BracketPress {
 
         $this->post = $post;
         $this->matchlist = new BracketPressMatchList($post->ID);
+        $master = $this->get_option('master_id');
+        if ($master) {
+            $this->winnerlist = new BracketPressMatchList($master);
+        }
 
         $file = apply_filters( 'bracketpress_template_display',   $this->themes_dir .  'bracket_display.php' );
 
