@@ -51,6 +51,9 @@ brought it to life. See the file credits.txt for a full list of contributors.
 
 == Changelog ==
 
+= 1.2.1 =
+* Fixed problem where randomization led to a unchangeable bracket due to user_id not being stored.
+
 = 1.2.0 =
 * Out of beta and ready for prime time!
 * Added filters to allow adding HTML to the white areas of the bracket page 
@@ -98,7 +101,7 @@ brought it to life. See the file credits.txt for a full list of contributors.
 * Completed initial development
 == Upgrade Notice ==
 
-= 1.2.0 =
+= 1.2.1 =
 * Out if beta! Please upgrade.
 
 = 1.0.3 =
