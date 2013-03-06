@@ -333,25 +333,26 @@ Final Game Combined Score Estimate: <?php print  stripslashes(bracketpress()->po
                 <?php
                 $matchlist = bracketpress()->matchlist;
                 $finals = $matchlist->getMatch(63);
+                $winner = $class = '';
 
-                $winnerlist = bracketpress()->winnerlist;
-                if ($winnerlist) {
+                if ($finals->points_awarded !== NULL) {
+                    // Set a class only if we've scored
+                    $winnerlist = bracketpress()->winnerlist;
+                    if ($winnerlist) {
 
-                    if ($winner->ID === $finals->getWinner()->ID) {
-                        $class = "won";
-                    } else {
-                        $class = "lost";
-                        $winner = $winnerlist->getMatch(63)->getWinner();
-
+                        if ($winner->ID === $finals->getWinner()->ID) {
+                            $class = "won";
+                        } else {
+                            $class = "lost";
+                            $winner = $winnerlist->getMatch(63)->getWinner();
+                        }
                     }
                 }
-
                 ?>
 
-
-                Overall Winner<br>
+                Champion<br>
                 <?php // print print_r($finals, true); ?>
-                <span class="<?php echo $class ?>"><u><?php print ($finals->getWinner()->name); ?></u></span><br>
+                <span class="<?php echo $class ?>"><u> <?php print ($finals->getWinner()->name); ?> </u></span><br>
                 <?php if ($winner) print "( {$winner->name} )"; ?>
                 <br> Combined Score: <?php print  stripslashes(bracketpress()->post->combined_score); ?>
             </center>
