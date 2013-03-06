@@ -11,9 +11,9 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 == Description ==
 
 BracketPress is a free WordPress plugin which enables site owners to run their own Division One NCAA
-tournament pool.  Designed with businesses in mind, this tool enables you to engage and market to your
-website visitors in a fun and meaningful way.  All the while, keeping traffic on YOUR site, with YOUR
-branding.
+tournament pool during March.  Designed with businesses in mind, this tool enables you to engage and
+market to your website visitors in a fun and meaningful way.
+All the while, keeping traffic on YOUR site, with YOUR branding.
 
 An inside look :
 
@@ -118,6 +118,7 @@ brought it to life. See the file credits.txt for a full list of contributors.
 = People =
 * Scott Hack
 * Nick Temple
+* Veronica Robinson
 * Karamvir Singh
 * Charles Griffin
 * Jason Melgoza ( CSS of Bracket )
