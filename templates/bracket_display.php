@@ -98,25 +98,25 @@ function bracketpress_partial_display_bracket($this_match_id, $m, $team1, $team2
     <p class="slot slot1 team_<?php echo $team1->ID ?>" <?php echo $id1 ?>>
             <span class="seed <?php echo $class1 ?>">
                 <?php if ($winner1) { ?>
-                <span class="org_win1"><?php echo $winner1 ?></span>
+                    <span class="org_win1"><?php echo $winner1 ?></span>
                 <?php } ?>
-
                 <?php if ($team1) { ?>
-                <span class="team_ids"> <?php if ($show_seed) echo $team1->seed; ?></span> <?php print bracketpress_display_name($team1->name) ?>
-            <?php } ?>
-                <em class="score"><?php echo $this_match_id ?></em>
-        </span>
+                    <span class="team_ids"> <?php if ($show_seed) echo $team1->seed; ?></span> <?php print bracketpress_display_name($team1->name) ?>
+                <?php } ?>
+                <em class="score"><?php // echo $this_match_id ?></em>
+            </span>
+
     </p>
     <p class="slot slot2 team_<?php echo $team2->ID ?>" <?php echo $id2 ?>>
             <span class="seed <?php echo $class2 ?>">
                 <?php if ($winner2) { ?>
-                <span class="org_win2"><?php echo $winner2 ?></span>
+                    <span class="org_win2"><?php echo $winner2 ?></span>
                 <?php } ?>
                 <?php if ($team2) { ?>
-                <span class="team_ids"> <?php if ($show_seed) echo $team2->seed; ?></span> <?php print bracketpress_display_name($team2->name) ?>
-            </span>
-            <?php } ?>
+                    <span class="team_ids"> <?php if ($show_seed) echo $team2->seed; ?></span> <?php print bracketpress_display_name($team2->name) ?>
+                <?php } ?>
                 <em class="score"><?php  ?></em>
+            </span>
     </p>
 </div>
 <?php
@@ -199,25 +199,6 @@ function bracketpress_display_rounds($num, $name) {
     ?>
 <div id="round<?php print $num ?>" class="round">
     <h3>Round <?php print $name ?> (2013 NCAA Men's Basketball Tournament)</h3>
-<?php /*
-    <div class="region region1">
-        <h4 class="region1">SOUTH</h4>
-        <?php bracketpress_partial_display_round($num, BRACKETPRESS_REGION_SOUTH); ?>
-    </div>
-    <div class="region region2">
-        <h4 class="region2">WEST</h4>
-        <?php bracketpress_partial_display_round($num, BRACKETPRESS_REGION_WEST); ?>
-    </div>
-    <div class="region region3">
-        <h4 class="region3"> EAST </h4>
-        <?php bracketpress_partial_display_round($num, BRACKETPRESS_REGION_EAST); ?>
-    </div>
-    <div class="region region4">
-        <h4 class="region4">MIDWEST</h4>
-        <?php bracketpress_partial_display_round($num, BRACKETPRESS_REGION_MIDWEST); ?>
-    </div>
-*/ ?>
-
     <div class="region region1">
         <h4 class="region1">MIDWEST</h4>
         <?php bracketpress_partial_display_round($num, BRACKETPRESS_REGION_MIDWEST); ?>
@@ -234,9 +215,6 @@ function bracketpress_display_rounds($num, $name) {
         <h4 class="region4">EAST</h4>
         <?php bracketpress_partial_display_round($num, BRACKETPRESS_REGION_EAST); ?>
     </div>
-
-
-
 </div>
 <?php
 }
@@ -284,25 +262,6 @@ Final Game Combined Score Estimate: <?php print  stripslashes(bracketpress()->po
         <h3>
             Round One (2013 NCAA Men's Basketball Tournament)
         </h3>
-<?php /*
-        <div class="region region1">
-            <h4 class="region1 first_region">SOUTH</h4>
-            <?php bracketpress_partial_display_seed(BRACKETPRESS_REGION_SOUTH) ?>
-        </div>
-        <div class="region region2">
-            <h4 class="region2 first_region">WEST</h4>
-            <?php bracketpress_partial_display_seed(BRACKETPRESS_REGION_WEST) ?>
-        </div>
-        <div class="region region3">
-            <h4 class="region3 first_region">EAST</h4>
-            <?php bracketpress_partial_display_seed(BRACKETPRESS_REGION_EAST) ?>
-        </div>
-        <div class="region region4">
-            <h4 class="region4 first_region">MIDWEST</h4>
-            <?php bracketpress_partial_display_seed(BRACKETPRESS_REGION_MIDWEST) ?>
-        </div>
- */ ?>
-
 
         <div class="region region1">
             <h4 class="region1 first_region">MIDWEST</h4>
@@ -350,8 +309,6 @@ Final Game Combined Score Estimate: <?php print  stripslashes(bracketpress()->po
 
                 $team1 = $match->getTeam1();
                 $team2 = $match->getTeam2();
-
-                print "(($x))";
 
                 bracketpress_partial_display_bracket($match_id, $x, $team1, $team2, false, $match);
             }

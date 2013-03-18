@@ -490,7 +490,7 @@ function () {
         $('#get_team_selector_match61').html('<option value="0">~Select~</option>');       // clear the select box
 
         // Add the items
-        set_team(62, 1, $('#get_team_selector_south_match15').val(), winner );
+        set_team(61, 1, $('#get_team_selector_midwest_match60').val(), winner );
         set_team(61, 2, $('#get_team_selector_west_match30').val(), winner );
 
         // Save the current winner if we have one
@@ -498,8 +498,8 @@ function () {
         $('#get_team_selector_match62').html('<option value="0">~Select~</option>');       // clear the select box
 
         // Add the items
+        set_team(62, 1, $('#get_team_selector_south_match15').val(), winner );
         set_team(62, 2, $('#get_team_selector_east_match45').val(), winner );
-        set_team(61, 1, $('#get_team_selector_midwest_match60').val(), winner );
 
         // Clear and create the final round
         winner = $('#get_team_selector_match63').val();
