@@ -288,7 +288,8 @@ function bracketpress_partial_show_region($region, $region_name, $match) {
 
     </div>
 </div>
-    <!-- Bracket -->
+
+    !-- Bracket -->
 
 </div>
 

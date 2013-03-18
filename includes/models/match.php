@@ -174,10 +174,10 @@ class BracketPressMatchList {
 
         // Final Four
         switch ($id) {
-            case 15: $next_game = array(61, 0); break;
+            case 15: $next_game = array(62, 0); break;
             case 30: $next_game = array(61, 1); break;
-            case 45: $next_game = array(62, 0); break;
-            case 60: $next_game = array(62, 1); break;
+            case 45: $next_game = array(62, 1); break;
+            case 60: $next_game = array(61, 0); break;
 
             case 61: $next_game = array(63, 0); break;
             case 62: $next_game = array(63, 1); break;
@@ -251,8 +251,8 @@ class BracketPressMatchList {
 
         // Special case tournament bracket
         if ($id > 60)  {
-            if ($id == 61) $previous = array(15, 30);
-            if ($id == 62) $previous = array(45, 60);
+            if ($id == 61) $previous = array(60, 30);
+            if ($id == 62) $previous = array(15, 45);
             if ($id == 63) $previous = array(61, 62);
         }
 

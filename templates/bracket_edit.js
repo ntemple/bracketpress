@@ -109,16 +109,16 @@ function () {
     var sel_match;
 
     sel_match = get_sel_match(15);
-    if (sel_match['winner_id']) set_team(61, 1, sel_match.winner_id);
+    if (sel_match['winner_id']) set_team(62, 1, sel_match.winner_id);
 
     sel_match = get_sel_match(30);
     if (sel_match['winner_id']) set_team(61, 2, sel_match.winner_id);
 
     sel_match = get_sel_match(45);
-    if (sel_match['winner_id']) set_team(62, 1, sel_match.winner_id);
+    if (sel_match['winner_id']) set_team(62, 2, sel_match.winner_id);
 
     sel_match = get_sel_match(60);
-    if (sel_match['winner_id']) set_team(62, 2, sel_match.winner_id);
+    if (sel_match['winner_id']) set_team(61, 1, sel_match.winner_id);
 
     sel_match = get_sel_match(61);
     if (sel_match['winner_id']) {
