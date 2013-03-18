@@ -51,6 +51,9 @@ brought it to life. See the file credits.txt for a full list of contributors.
 
 == Changelog ==
 
+= 1.4.0 =
+* Updated for 2013 region display order and final 4 matching.
+
 = 1.2.1 =
 * Fixed problem where randomization led to a unchangeable bracket due to user_id not being stored.
 
@@ -100,6 +103,9 @@ brought it to life. See the file credits.txt for a full list of contributors.
 * First public release
 * Completed initial development
 == Upgrade Notice ==
+
+= 1.4.0 =
+* Critical update for 2013: the region order and final 4 matchup has been changed from 2012. Please update now!
 
 = 1.2.1 =
 * Out if beta! Please upgrade.
