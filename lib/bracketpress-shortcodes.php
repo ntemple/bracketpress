@@ -151,12 +151,12 @@ function bracketpress_shortcode_all_brackets($atts) {
                 $score = 'Unscored';
             }
             print "
-            <tr>
-              <td width='30%'><a href='{$link}'>{$post->post_title}</a></td>
-              <td width='25%'>{$author->display_name}</td>
-              <td width='25%'>{$author->first_name}</td>
-              <td width='10%'>{$author->last_name[0]}</td>
-              <td width='10%'>{$score}</td>
+            <tr class='brackets'>
+              <td width='30%' class='bracket_title'><a href='{$link}'>{$post->post_title}</a></td>
+              <td width='25%' class='bracket_user'>{$author->display_name}</td>
+              <td width='25%' class='bracket_fname'>{$author->first_name}</td>
+              <td width='10%' class='bracket_lname'>{$author->last_name[0]}</td>
+              <td width='10%' class='bracket_score'>{$score}</td>
             </tr>";
 
         }
