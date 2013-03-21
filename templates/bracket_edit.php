@@ -215,8 +215,6 @@ function bracketpress_partial_show_region($region, $region_name, $match) {
 <div id="content-wrapper">
 
 <div id="table">
-
-    <!-- Table Dates -->
     <table class="gridtable">
         <tr>
             <th>&nbsp;</th>
@@ -235,19 +233,16 @@ function bracketpress_partial_show_region($region, $region_name, $match) {
         <li><a href="#reg-4">MIDWEST</a></li>
         <li><a href="#reg-5">FINALS</a></li>
     </ul>
+
     <?php
     bracketpress_partial_show_region(1, 'south',   1);
     bracketpress_partial_show_region(2, 'west',    16);
     bracketpress_partial_show_region(3, 'east',    31);
     bracketpress_partial_show_region(4, 'midwest', 46);
-?>
+    ?>
 
     <div id="reg-5">
         <h2>Final Four</h2>
-        <!--
-        Team 1 Score <input type="text" size="10"><br>
-        Team 2 Score: <input type="text" size="10">
-        -->
         <div id="bracket" style="left: 200; top:50">
             <div id="round1" class="round">
                 <div id="match61seed" class="match" style="top: 0px">
@@ -282,14 +277,11 @@ function bracketpress_partial_show_region($region, $region_name, $match) {
                     </p>
                 </div>
             </div>
-
         </div>
-
-
     </div>
 </div>
 
 
 </div>
 
-</div> <!-- Page -->
+</div>

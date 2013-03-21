@@ -51,6 +51,10 @@ brought it to life. See the file credits.txt for a full list of contributors.
 
 == Changelog ==
 
+= 1.4.4 =
+* Add class to bracketpress shortcode for easier styling (Brandon Kraft)
+* Cleaned up commented out HTML that IE seems to be choking on
+
 = 1.4.0 =
 * Updated for 2013 region display order and final 4 matching.
 
@@ -128,4 +132,5 @@ brought it to life. See the file credits.txt for a full list of contributors.
 * Karamvir Singh
 * Charles Griffin
 * Jason Melgoza ( CSS of Bracket )
+* Brandon Kraft
 
